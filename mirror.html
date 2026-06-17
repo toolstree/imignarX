@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#162b1d" />
+  <title>Your Mirror | ImignarX</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    html,body {
+      margin:0;
+      min-height:100%;
+      overflow-x:hidden;
+      background: linear-gradient(180deg, #11190f 0%, #18251a 35%, #2a3825 70%, #3e4d2f 100%);
+      color:#eef2e2;
+      position:relative;
+    }
+    body::before {
+      content:'';
+      position:fixed;
+      inset:0;
+      background: radial-gradient(circle at 20% 10%, rgba(255, 210, 145, 0.12), transparent 20%),
+                  radial-gradient(circle at 80% 30%, rgba(245, 235, 200, 0.08), transparent 18%),
+                  radial-gradient(circle at 50% 80%, rgba(188, 161, 111, 0.06), transparent 25%);
+      pointer-events:none;
+      opacity:0.85;
+      animation: driftLight 24s ease-in-out infinite;
+      z-index:-1;
+    }
+    @keyframes driftLight {
+      0%, 100% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(10px,-8px,0) scale(1.02); }
+    }
+    .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px 18px 28px;
+      min-height:100vh;
+    }
+    .card{
+      width:min(100%,500px);
+      background:rgba(18, 28, 20, 0.92);
+      border:1px solid rgba(236, 201, 145, 0.1);
+      border-radius:32px;
+      padding:28px;
+      box-shadow:0 30px 80px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(10px);
+    }
+    h1{
+      margin:0 0 6px;
+      font-size:1.7rem;
+      letter-spacing:0.01em;
+    }
+    .subtitle{
+      margin:0 0 20px;
+      color:#c8d7c7;
+      line-height:1.5;
+    }
+    .welcome{
+      margin:0 0 20px;
+      color:#f3f5ea;
+      font-size:1.05rem;
+      line-height:1.6;
+    }
+    .section{margin-top:18px;}
+    .section-header{
+      margin:0 0 10px;
+      font-size:0.9rem;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      color:#d4c49d;
+    }
+    .insight{
+      padding:18px;
+      border-radius:20px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#eef2e2;
+      line-height:1.7;
+      font-size:1rem;
+      min-height:100px;
+      white-space:pre-wrap;
+    }
+    .question{
+      margin:24px 0 10px;
+      color:#b8c5b6;
+    }
+    .feedback-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .btn{
+      padding:12px 16px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.05);
+      color:#eef2e2;
+      cursor:pointer;
+      font-size:0.98rem;
+      transition:transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:rgba(210,180,115,0.45);background:rgba(255,255,255,0.08);}
+    .thanks{margin-top:14px;color:#c8c4a9;}
+    .collapse-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: none;
+      background: transparent;
+      color: #eef2e2;
+      padding: 0;
+      font-size: 0.9rem;
+      text-align: left;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      gap: 12px;
+    }
+    .collapse-toggle::after {
+      content: '\25BC';
+      display: inline-block;
+      transition: transform 220ms ease;
+      color: #c8d7c7;
+    }
+    .collapse-toggle.open::after {
+      transform: rotate(-180deg);
+    }
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 240ms ease, opacity 240ms ease;
+    }
+    .collapsible-content.open {
+      opacity: 1;
+    }
+    .why-detail {
+      margin-top: 14px;
+      color: #d7d9cc;
+      line-height: 1.7;
+      font-size: 0.96rem;
+      white-space: pre-wrap;
+    }
+    @media (max-width:420px){.card{padding:22px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Your Mirror</h1>
+      <p class="subtitle">A calm daily reflection grounded in your recent check-ins.</p>
+
+      <p id="welcome" class="welcome">Welcome, friend.</p>
+
+      <div class="section">
+        <div class="section-header">Today's focus</div>
+        <div id="todayFocus" class="insight"></div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">Recent focus pattern</div>
+        <div id="patternSummary" class="insight">A summary of the last seven entries will appear here once you add today's focus.</div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">Today's Practical Reflection</div>
+        <div id="practicalReflection" class="insight">A useful observation will appear here once your recent data is read.</div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">Today's Gentle Action</div>
+        <div id="gentleAction" class="insight">A small practical step to try today.</div>
+      </div>
+
+      <div class="section">
+        <button id="whyToggle" class="section-header collapse-toggle" type="button" aria-expanded="false">
+          Why This Reflection?
+        </button>
+        <div id="whyPanel" class="collapsible-content">
+          <div id="whyReflection" class="insight"></div>
+        </div>
+      </div>
+
+      <p class="question">Did this feel accurate?</p>
+      <div class="feedback-row">
+        <button id="fb-yes" class="btn">🔥 Strongly</button>
+        <button id="fb-some" class="btn">🙂 Somewhat</button>
+        <button id="fb-no" class="btn">🤔 Not Really</button>
+      </div>
+
+      <div id="thanks" class="thanks" style="display:none">Thank you. Your mirror is becoming clearer.</div>
+    </div>
+  </div>
+
+  <script>
+    const name = localStorage.getItem('imignarxName');
+    const dob = localStorage.getItem('imignarxDob');
+    const focus = localStorage.getItem('imignarxFocus');
+
+    if (!name || !dob || !focus) {
+      window.location.href = 'focus.html';
+    }
+
+    const firstName = (name || '').split(' ')[0] || '';
+    document.getElementById('welcome').textContent = `Welcome, ${firstName}.`;
+
+    function loadFocusHistory() {
+      const stored = localStorage.getItem('imignarxFocusHistory');
+      try {
+        const parsed = stored ? JSON.parse(stored) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function makeFocusCounts(history) {
+      return history.reduce((acc, entry) => {
+        acc[entry.focus] = (acc[entry.focus] || 0) + 1;
+        return acc;
+      }, {});
+    }
+
+    function getRecentEntries(history) {
+      return history.slice(-7);
+    }
+
+    function buildPatternSummary(history) {
+      const recent = getRecentEntries(history);
+      if (!recent.length) {
+        return 'No recorded focus entries are available yet. Today’s chosen focus is the first step toward evidence-based insight.';
+      }
+
+      const counts = makeFocusCounts(recent);
+      const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+      const summary = entries.map(([focus, count]) => `${focus} ${count} time${count === 1 ? '' : 's'}`).join(', ');
+
+      if (entries.length === 1) {
+        return `Your last ${recent.length} entries are all ${entries[0][0]}.`;
+      }
+      return `In the most recent ${recent.length} entries, ${summary}.`;
+    }
+
+    function buildWhyReflection(history, currentFocus) {
+      const recent = getRecentEntries(history);
+      if (!recent.length) {
+        return `No previous focus entries were found. Today’s reflection uses your selected focus: ${currentFocus}.`;
+      }
+
+      const counts = makeFocusCounts(recent);
+      const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+      const total = recent.length;
+      const lines = [];
+
+      lines.push(`Today’s selected focus: ${currentFocus}.`);
+      lines.push(`Based on the last ${total} entr${total === 1 ? 'y' : 'ies'} stored in localStorage:`);
+      entries.forEach(([focus, count]) => {
+        lines.push(`${focus} appeared in ${count} of your last ${total} entr${total === 1 ? 'y' : 'ies'}.`);
+      });
+
+      const [topFocus, topCount] = entries[0];
+      if (topCount >= Math.ceil(total * 0.6)) {
+        lines.push('Your focus has remained consistent recently.');
+      } else if (total >= 4 && topCount <= 2) {
+        lines.push('Your focus has shifted frequently this week.');
+      }
+
+      return lines.join('\n');
+    }
+
+    function buildPracticalReflection(history, currentFocus) {
+      const recent = getRecentEntries(history);
+      const counts = makeFocusCounts(recent);
+      const [dominantFocus, dominantCount] = Object.entries(counts).sort((a, b) => b[1] - a[1])[0] || [];
+
+      if (!dominantFocus) {
+        return 'Keep today’s focus clear and limited to one practical step.';
+      }
+      if (dominantFocus === currentFocus && dominantCount >= 2) {
+        return `You have returned to ${currentFocus} more than once. Keep today’s action small and specific within that area.`;
+      }
+      if (dominantFocus !== currentFocus) {
+        return `Your current focus is ${currentFocus}. Treat it as today’s primary area without trying to address the other recent focus areas at the same time.`;
+      }
+      return `Today’s practical reflection is to focus on a single clear action within ${currentFocus}.`;
+    }
+
+    function buildGentleAction(history, currentFocus) {
+      const recent = getRecentEntries(history);
+      if (!recent.length) {
+        return 'Write today’s focus in simple terms and check back tomorrow for a clearer pattern.';
+      }
+
+      const counts = makeFocusCounts(recent);
+      const [dominantFocus, dominantCount] = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+
+      if (dominantFocus === currentFocus && dominantCount >= 3) {
+        return `Since ${currentFocus} appears frequently, choose one small, manageable step in that area today.`;
+      }
+      if (dominantFocus !== currentFocus) {
+        return `Today, keep ${currentFocus} simple so you can see whether it shifts the pattern in the next entries.`;
+      }
+      return `Make today’s focus concrete and revisit the same area tomorrow if it still matters.`;
+    }
+
+    const today = new Date().toISOString().slice(0,10);
+    const focusHistory = loadFocusHistory();
+    const patternText = buildPatternSummary(focusHistory);
+    const whyText = buildWhyReflection(focusHistory, focus);
+    const practicalText = buildPracticalReflection(focusHistory, focus);
+    const gentleText = buildGentleAction(focusHistory, focus);
+
+    document.getElementById('todayFocus').textContent = focus;
+    document.getElementById('patternSummary').textContent = patternText;
+    document.getElementById('whyReflection').textContent = whyText;
+    document.getElementById('practicalReflection').textContent = practicalText;
+    document.getElementById('gentleAction').textContent = gentleText;
+
+    const whyToggle = document.getElementById('whyToggle');
+    const whyPanel = document.getElementById('whyPanel');
+    whyToggle.addEventListener('click', () => {
+      const open = whyPanel.classList.toggle('open');
+      whyToggle.classList.toggle('open', open);
+      whyToggle.setAttribute('aria-expanded', String(open));
+      whyPanel.style.maxHeight = open ? `${whyPanel.scrollHeight}px` : '0';
+    });
+
+    const fbYes = document.getElementById('fb-yes');
+    const fbSome = document.getElementById('fb-some');
+    const fbNo = document.getElementById('fb-no');
+    const thanks = document.getElementById('thanks');
+
+    function saveFeedback(value) {
+      const payload = {
+        date: today,
+        name,
+        dob,
+        focus,
+        feedback: value,
+        whyReflection: whyText,
+        practicalReflection: practicalText,
+        gentleAction: gentleText,
+      };
+      try {
+        localStorage.setItem('imignarxMirrorFeedback', JSON.stringify(payload));
+      } catch (e) {
+        console.error('Failed to save feedback', e);
+      }
+      thanks.textContent = 'Thank you. Your mirror is becoming clearer.';
+      thanks.style.display = 'block';
+    }
+
+    fbYes.addEventListener('click', () => saveFeedback('strongly'));
+    fbSome.addEventListener('click', () => saveFeedback('somewhat'));
+    fbNo.addEventListener('click', () => saveFeedback('not_really'));
+  </script>
+</body>
+</html>

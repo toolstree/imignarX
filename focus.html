@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Focus of Today | ImignarX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="brand">
+        <h1>Focus of Today</h1>
+        <p class="subtitle">Choose the one area you want to keep practical and grounded today.</p>
+      </div>
+
+      <form id="focus-form">
+        <div class="section-header">Select a focus</div>
+        <div class="radio-grid">
+          <label class="radio-option">
+            <input type="radio" name="focus" value="Work" />
+            <span>Work</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="focus" value="Money" />
+            <span>Money</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="focus" value="Health" />
+            <span>Health</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="focus" value="Family" />
+            <span>Family</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="focus" value="Learning" />
+            <span>Learning</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="focus" value="Relationship" />
+            <span>Relationship</span>
+          </label>
+        </div>
+
+        <button type="submit">Continue</button>
+        <p id="focus-feedback" class="feedback"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const name = localStorage.getItem('imignarxName');
+    if (!name) {
+      window.location.href = 'index.html';
+    }
+
+    const today = new Date().toISOString().slice(0, 10);
+    const todayFocus = localStorage.getItem('imignarxLastFocusDate') === today ? localStorage.getItem('imignarxFocus') : null;
+    if (todayFocus) {
+      const radio = document.querySelector(`input[name=focus][value="${todayFocus}"]`);
+      if (radio) radio.checked = true;
+    }
+
+    function loadFocusHistory() {
+      const stored = localStorage.getItem('imignarxFocusHistory');
+      try {
+        const parsed = stored ? JSON.parse(stored) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveFocusHistory(entry) {
+      const history = loadFocusHistory();
+      const existingIndex = history.findIndex(item => item.date === entry.date);
+      if (existingIndex >= 0) {
+        history[existingIndex] = entry;
+      } else {
+        history.push(entry);
+      }
+      const cleaned = history.slice(-30);
+      localStorage.setItem('imignarxFocusHistory', JSON.stringify(cleaned));
+    }
+
+    document.getElementById('focus-form').addEventListener('submit', event => {
+      event.preventDefault();
+      const chosen = document.querySelector('input[name=focus]:checked');
+      const feedback = document.getElementById('focus-feedback');
+      if (!chosen) {
+        feedback.textContent = 'Please choose your focus for today.';
+        return;
+      }
+
+      const focus = chosen.value;
+      localStorage.setItem('imignarxFocus', focus);
+      localStorage.setItem('imignarxLastFocusDate', today);
+      saveFocusHistory({ date: today, focus });
+      window.location.href = 'mirror.html';
+    });
+  </script>
+</body>
+</html>
