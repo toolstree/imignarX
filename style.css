@@ -93,13 +93,17 @@ label {
 }
 
 /* Language selector visible and prominent */
-#language {
-  padding: 12px 14px;
-  font-size: 1rem;
-  background: rgba(255,255,255,0.02);
-  color: #eaf2ff;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.03);
+#language,
+select {
+  color: #ffffff !important;
+  background: rgba(15, 23, 42, 0.95);
+  font-weight: 600;
+}
+
+#language option,
+select option {
+  color: #ffffff;
+  background: #0f172a;
 }
 
 /* Primary CTA - strong and punchy */
