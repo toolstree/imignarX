@@ -61,143 +61,101 @@
 
   <script src="app.js"></script>
   <script>
-    const STORAGE_KEY = 'imignarxDailySessions';
-    const sessionDate = new Date().toISOString().slice(0, 10);
-    const name = localStorage.getItem('imignarxName');
-    const dob = localStorage.getItem('imignarxDob');
 
-    if (!name || !dob) {
-      window.location.href = 'index.html';
-    }
+const name =
+localStorage.getItem("imignarxName") || "Friend";
 
-    const firstName = (name || '').split(' ')[0] || 'friend';
-    document.getElementById('welcome').textContent = `Welcome, ${firstName}.`;
+document.getElementById("welcome").textContent =
+`Welcome, ${name.split(" ")[0]}.`;
 
-    function loadSessions() {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      try {
-        return stored ? JSON.parse(stored) : {};
-      } catch (e) {
-        return {};
-      }
-    }
+const result =
+JSON.parse(
+localStorage.getItem("imignarxLatestResult")
+);
 
-    function savePreference(key, value) {
-      localStorage.setItem(key, value);
-    }
+if(result){
 
-    function loadNotificationsEnabled() {
-      const value = localStorage.getItem('imignarxNotificationsEnabled');
-      return value === null ? true : value === 'true';
-    }
+document.getElementById(
+"mindWeatherValue"
+).textContent =
+result.weather || "🌤️ Unknown";
 
-    function updateNotificationUI(enabled) {
-      const label = document.getElementById('notificationLabel');
-      label.textContent = enabled ? translate('mirror', 'notificationOn') : translate('mirror', 'notificationOff');
-    }
+document.getElementById(
+"archetypeValue"
+).textContent =
+result.archetype || "🦝 Explorer";
 
-    function scheduleNotification(message) {
-      const card = document.createElement('div');
-      card.className = 'notification-card';
-      card.textContent = message;
-      document.body.appendChild(card);
-      setTimeout(() => card.remove(), 6000);
+document.getElementById(
+"observationValue"
+).textContent =
+result.observation || "";
 
-      if (window.Notification && Notification.permission === 'granted') {
-        new Notification(message);
-      }
-    }
+document.getElementById(
+"nightCompanionValue"
+).textContent =
+result.companion || "";
 
-    function maybeStartNotifications(enabled) {
-      const messages = [
-        { hour: 9, text: 'New absurdity available.' },
-        { hour: 14, text: 'Human status check required.' },
-        { hour: 20, text: 'Your daily debrief is waiting.' },
-      ];
-      const now = new Date();
-      messages.forEach((item) => {
-        const fireAt = new Date(now);
-        fireAt.setHours(item.hour, 0, 0, 0);
-        if (fireAt.getTime() <= now.getTime()) {
-          fireAt.setDate(fireAt.getDate() + 1);
-        }
-        const delay = fireAt.getTime() - now.getTime();
-        if (enabled) {
-          setTimeout(() => scheduleNotification(item.text), delay);
-        }
-      });
-    }
+}else{
 
-    function getWeeklyReport(sessions) {
-      const recent = Object.values(sessions)
-        .filter((session) => session.finished)
-        .sort((a, b) => b.date.localeCompare(a.date))
-        .slice(0, 7);
-      if (!recent.length) {
-        return null;
-      }
+document.getElementById(
+"mindWeatherValue"
+).textContent =
+"Take today's quiz first";
 
-      const counts = recent.reduce((acc, session) => {
-        acc[session.archetype] = (acc[session.archetype] || 0) + 1;
-        return acc;
-      }, {});
+document.getElementById(
+"archetypeValue"
+).textContent =
+"—";
 
-      const total = recent.length;
-      const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-      const reportLines = sorted.map(([label, count]) => `${Math.round((count / total) * 100)}% ${label}`);
-      const topTrend = sorted[0];
-      const trendText = topTrend ? `Your strongest trend this week is ${topTrend[0]}.` : '';
-      return { reportLines, trendText };
-    }
+document.getElementById(
+"observationValue"
+).textContent =
+"No result found yet.";
 
-    function renderMirror(session) {
-      document.getElementById('mindWeatherValue').textContent = session.mindWeather;
-      document.getElementById('archetypeValue').textContent = session.archetype;
-      document.getElementById('observationValue').textContent = session.observation;
-      document.getElementById('nightCompanionValue').textContent = session.nightCompanion;
-    }
+document.getElementById(
+"nightCompanionValue"
+).textContent =
+"Complete Daily Decode.";
 
-    function initialize() {
-      const sessions = loadSessions();
-      const session = sessions[sessionDate];
-      if (!session || !session.finished) {
-        document.getElementById('weeklyReport').textContent = translate('mirror', 'noSession');
-        document.getElementById('weeklyTrend').textContent = '';
-        return;
-      }
+}
 
-      renderMirror(session);
-      const report = getWeeklyReport(sessions);
-      if (report) {
-        document.getElementById('weeklyReport').textContent = report.reportLines.join('\n');
-        document.getElementById('weeklyTrend').textContent = report.trendText;
-      }
-    }
+const notificationToggle =
+document.getElementById(
+"notificationToggle"
+);
 
-    const notificationToggle = document.getElementById('notificationToggle');
-    const notificationsEnabled = loadNotificationsEnabled();
-    notificationToggle.checked = notificationsEnabled;
-    updateNotificationUI(notificationsEnabled);
-    maybeStartNotifications(notificationsEnabled);
+notificationToggle.addEventListener(
+"change",
+()=>{
 
-    notificationToggle.addEventListener('change', () => {
-      const enabled = notificationToggle.checked;
-      savePreference('imignarxNotificationsEnabled', enabled.toString());
-      updateNotificationUI(enabled);
-      if (enabled && window.Notification && Notification.permission !== 'granted') {
-        Notification.requestPermission().then((result) => {
-          if (result === 'granted') {
-            scheduleNotification('Notification permission set. Your daily reminders are ready.');
-          }
-        });
-      }
-    });
+if(
+notificationToggle.checked &&
+window.Notification &&
+Notification.permission !== "granted"
+){
 
-    document.getElementById('returnToQuestions').addEventListener('click', () => {
-      window.location.href = 'focus.html';
-    });
+Notification.requestPermission();
 
-    initialize();
-  </script>
+}
+
+}
+);
+
+document
+.getElementById(
+"returnToQuestions"
+)
+.addEventListener(
+"click",
+()=>{
+
+window.location.href =
+"focus.html";
+
+}
+);
+
+</script>
+
 </body>
 </html>
