@@ -311,29 +311,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   applyTranslations();
 });
-document.addEventListener('DOMContentLoaded', () => {
-  const savedName = localStorage.getItem(STORAGE_KEYS.name);
-  const savedDob = localStorage.getItem(STORAGE_KEYS.dob);
-  const todayDate = new Date().toISOString().slice(0, 10);
-  const savedSession = JSON.parse(localStorage.getItem('imignarxDailySessions') || '{}')[todayDate];
-
-  if (isIndexPage()) {
-    if (savedName && savedDob && savedSession && savedSession.finished) {
-      window.location.href = 'mirror.html';
-      return;
-    }
-    if (savedName && savedDob) {
-      window.location.href = 'focus.html';
-      return;
-    }
-    initOnboarding();
-    return;
-  }
-
-  if (!savedName || !savedDob) {
-    window.location.href = 'index.html';
-    return;
-  }
-
-  applyTranslations();
-});
