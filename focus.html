@@ -1,1 +1,476 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>🧠 Daily Decode | ImignarX</title>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="card">
+
+```
+<div class="brand">
+
+  <h1>🧠 Daily Decode</h1>
+
+  <p class="subtitle">
+    Discover what creature is secretly operating your brain today.
+  </p>
+
+</div>
+
+<div id="quizContainer">
+
+  <div class="progress-row">
+
+    <div id="questionCounter" class="progress-label">
+      Question 1/10
+    </div>
+
+    <div id="progressPercent" class="progress-percent">
+      10%
+    </div>
+
+  </div>
+
+  <div class="progress-bar">
+    <div id="progressFill" class="progress-fill"></div>
+  </div>
+
+  <div id="questionText" class="question-text">
+
+  </div>
+
+  <div id="optionsContainer" class="answer-options">
+
+  </div>
+
+  <div class="controls">
+
+    <button id="skipButton" class="btn secondary">
+      Skip
+    </button>
+
+    <button id="nextButton" class="btn primary">
+      Next →
+    </button>
+
+  </div>
+
+  <p id="answerFeedback" class="feedback"></p>
+
+</div>
+
+<div id="resultContainer" class="hidden">
+
+  <div class="collectible-card">
+
+    <div id="resultArchetype" class="archetype-display">
+      🦝 Side Quest Collector
+    </div>
+
+    <br>
+
+    <div id="resultWeather" class="mind-weather-display">
+      ⛅ Mild Chaos
+    </div>
+
+    <br>
+
+    <div id="resultObservation" class="result-value">
+
+    </div>
+
+    <br>
+
+    <div id="resultCompanion" class="result-value">
+
+    </div>
+
+  </div>
+
+  <br>
+
+  <button id="continueButton" class="primary-button">
+    See My Mirror →
+  </button>
+
+</div>
+```
+
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+
+<script>
+
+const QUESTIONS = [
+
+{
+question: "Your brain's transportation today?",
+options: [
+{ text:"🚀 Rocket", type:"momentum" },
+{ text:"🚗 Reliable Sedan", type:"owl" },
+{ text:"🛺 Rickshaw Missing A Wheel", type:"delayer" },
+{ text:"🦄 Teleporting Unicorn", type:"sidequest" }
+]
+},
+
+{
+question: "How many tabs are open in your head?",
+options: [
+{ text:"😀 3", type:"owl" },
+{ text:"😅 17", type:"sidequest" },
+{ text:"🤯 58", type:"squirrel" },
+{ text:"👽 Unknown", type:"delayer" }
+]
+},
+
+{
+question: "Today's productivity mascot?",
+options: [
+{ text:"🐿️ Squirrel", type:"squirrel" },
+{ text:"🦥 Sloth", type:"delayer" },
+{ text:"🦅 Eagle", type:"momentum" },
+{ text:"🐼 Panda", type:"owl" }
+]
+},
+
+{
+question: "Your to-do list currently feels like?",
+options: [
+{ text:"📜 Ancient Scroll", type:"sidequest" },
+{ text:"🎯 Mission Brief", type:"momentum" },
+{ text:"🛋️ Decoration", type:"delayer" },
+{ text:"🧩 Puzzle", type:"owl" }
+]
+},
+
+{
+question: "Your energy level right now?",
+options: [
+{ text:"⚡ Unlimited", type:"momentum" },
+{ text:"☕ Running on Coffee", type:"squirrel" },
+{ text:"😴 Please Recharge", type:"delayer" },
+{ text:"🧘 Steady", type:"owl" }
+]
+},
+
+{
+question: "What usually distracts you?",
+options: [
+{ text:"📱 Phone", type:"squirrel" },
+{ text:"🌍 Random Curiosity", type:"sidequest" },
+{ text:"🛌 Comfort", type:"delayer" },
+{ text:"📊 Overthinking", type:"owl" }
+]
+},
+
+{
+question: "Your focus animal?",
+options: [
+{ text:"🦉 Owl", type:"owl" },
+{ text:"🐿️ Squirrel", type:"squirrel" },
+{ text:"🦝 Raccoon", type:"sidequest" },
+{ text:"🦥 Sloth", type:"delayer" }
+]
+},
+
+{
+question: "How do you attack a problem?",
+options: [
+{ text:"🚀 Immediately", type:"momentum" },
+{ text:"🧠 Research First", type:"owl" },
+{ text:"🎲 Side Quest First", type:"sidequest" },
+{ text:"⏰ Tomorrow", type:"delayer" }
+]
+},
+
+{
+question: "Your mood soundtrack?",
+options: [
+{ text:"🔥 Action Movie", type:"momentum" },
+{ text:"🎻 Thinking Music", type:"owl" },
+{ text:"🎪 Circus Theme", type:"sidequest" },
+{ text:"😴 Lullaby", type:"delayer" }
+]
+},
+
+{
+question: "How would friends describe today?",
+options: [
+{ text:"🚀 Productive", type:"momentum" },
+{ text:"🧠 Thoughtful", type:"owl" },
+{ text:"🦝 Random", type:"sidequest" },
+{ text:"🦥 Relaxed", type:"delayer" }
+]
+}
+
+];
+
+let currentQuestion = 0;
+let selectedAnswer = null;
+
+const scores = {
+momentum:0,
+owl:0,
+sidequest:0,
+delayer:0,
+squirrel:0
+};
+
+const questionText =
+document.getElementById("questionText");
+
+const optionsContainer =
+document.getElementById("optionsContainer");
+
+const questionCounter =
+document.getElementById("questionCounter");
+
+const progressFill =
+document.getElementById("progressFill");
+
+const progressPercent =
+document.getElementById("progressPercent");
+
+function renderQuestion(){
+
+const q = QUESTIONS[currentQuestion];
+
+questionText.textContent = q.question;
+
+questionCounter.textContent =
+`Question ${currentQuestion+1}/10`;
+
+const percent =
+Math.round(((currentQuestion+1)/10)*100);
+
+progressPercent.textContent =
+`${percent}%`;
+
+progressFill.style.width =
+`${percent}%`;
+
+optionsContainer.innerHTML = "";
+
+q.options.forEach(option=>{
+
+const btn =
+document.createElement("button");
+
+btn.className =
+"option-card";
+
+btn.textContent =
+option.text;
+
+btn.addEventListener("click",()=>{
+
+document
+.querySelectorAll(".option-card")
+.forEach(card=>
+card.classList.remove("selected")
+);
+
+btn.classList.add("selected");
+
+selectedAnswer =
+option;
+
+});
+
+optionsContainer.appendChild(btn);
+
+});
+
+}
+
+renderQuestion();
+
+function getWinner() {
+
+let winner = "owl";
+let highest = 0;
+
+Object.keys(scores).forEach(key => {
+
+if(scores[key] > highest){
+highest = scores[key];
+winner = key;
+}
+
+});
+
+return winner;
+}
+
+function buildResult(type){
+
+const results = {
+
+momentum:{
+archetype:"🚀 Momentum Machine",
+weather:"☀️ Full Throttle",
+observation:
+"You move before doubt can catch up. Today your biggest advantage is momentum.",
+companion:
+"Today's Problems: Present. Today's You: Faster."
+},
+
+owl:{
+archetype:"🦉 Strategic Owl",
+weather:"🌤️ Clear Thinking",
+observation:
+"You think before acting. Your superpower today is seeing patterns others miss.",
+companion:
+"Slow decisions beat rushed regrets."
+},
+
+sidequest:{
+archetype:"🦝 Side Quest Collector",
+weather:"⛅ Mild Chaos",
+observation:
+"You started three adventures and somehow found two more. Curiosity is winning.",
+companion:
+"You 1. Boredom 0."
+},
+
+delayer:{
+archetype:"🦥 Professional Delayer",
+weather:"🌥️ Cozy Fog",
+observation:
+"You prefer letting ideas marinate. Sometimes waiting is strategy, sometimes it's a nap.",
+companion:
+"Progress still counts even when it moves slowly."
+},
+
+squirrel:{
+archetype:"🐿️ Caffeinated Squirrel",
+weather:"⚡ Hyper Active",
+observation:
+"Your brain is sprinting through possibilities. Energy is not the problem today.",
+companion:
+"Remember: finishing also releases dopamine."
+}
+
+};
+
+return results[type];
+}
+
+function showResult(){
+
+const winner =
+getWinner();
+
+const result =
+buildResult(winner);
+
+document
+.getElementById("quizContainer")
+.classList.add("hidden");
+
+document
+.getElementById("resultContainer")
+.classList.remove("hidden");
+
+document
+.getElementById("resultArchetype")
+.textContent =
+result.archetype;
+
+document
+.getElementById("resultWeather")
+.textContent =
+result.weather;
+
+document
+.getElementById("resultObservation")
+.textContent =
+result.observation;
+
+document
+.getElementById("resultCompanion")
+.textContent =
+result.companion;
+
+localStorage.setItem(
+"imignarxLatestResult",
+JSON.stringify(result)
+);
+
+}
+
+document
+.getElementById("nextButton")
+.addEventListener("click",()=>{
+
+if(!selectedAnswer){
+
+document
+.getElementById("answerFeedback")
+.textContent =
+"Choose an option first.";
+
+return;
+}
+
+scores[selectedAnswer.type]++;
+
+selectedAnswer = null;
+
+currentQuestion++;
+
+if(currentQuestion >= QUESTIONS.length){
+
+showResult();
+return;
+
+}
+
+renderQuestion();
+
+});
+
+document
+.getElementById("skipButton")
+.addEventListener("click",()=>{
+
+currentQuestion++;
+
+if(currentQuestion >= QUESTIONS.length){
+
+showResult();
+return;
+
+}
+
+renderQuestion();
+
+});
+
+document
+.getElementById("continueButton")
+.addEventListener("click",()=>{
+
+window.location.href =
+"mirror.html";
+
+});
+
+</script>
+
+</body>
+</html>
 
