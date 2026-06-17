@@ -196,3 +196,81 @@ textarea { min-height:120px; resize:vertical; border-radius:12px }
   .primary-button, .btn.primary { font-size: 1rem }
 }
 Update style.css
+/* IMIGNARX V4 FUN MODE */
+
+.answer-options {
+display: grid;
+gap: 14px;
+margin-top: 18px;
+}
+
+.option-card {
+width: 100%;
+padding: 16px;
+border-radius: 18px;
+border: 1px solid rgba(255,255,255,0.08);
+background: linear-gradient(
+135deg,
+rgba(124,58,237,0.18),
+rgba(59,130,246,0.12)
+);
+color: #ffffff;
+font-size: 1rem;
+font-weight: 600;
+text-align: left;
+cursor: pointer;
+transition: all .25s ease;
+}
+
+.option-card:hover {
+transform: translateY(-3px);
+border-color: rgba(255,255,255,0.25);
+box-shadow: 0 12px 24px rgba(124,58,237,0.25);
+}
+
+.option-card.selected {
+background: linear-gradient(
+135deg,
+#7c3aed,
+#3b82f6
+);
+border-color: rgba(255,255,255,0.4);
+}
+
+.collectible-card {
+border-radius: 20px;
+padding: 20px;
+background: linear-gradient(
+135deg,
+#1e1b4b,
+#312e81,
+#7c3aed
+);
+box-shadow: 0 16px 40px rgba(124,58,237,0.25);
+}
+
+.archetype-display {
+font-size: 1.4rem;
+font-weight: 800;
+}
+
+.mind-weather-display {
+font-size: 1.2rem;
+font-weight: 700;
+}
+
+.question-text {
+font-size: 1.25rem;
+line-height: 1.5;
+font-weight: 700;
+color: #ffffff;
+margin-bottom: 18px;
+}
+
+.card {
+background: linear-gradient(
+180deg,
+rgba(17,24,39,0.95),
+rgba(15,23,42,0.95)
+);
+}
