@@ -1,455 +1,79 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b1220" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css" />
-  <title>Daily Check-In | ImignarX</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>🧠 Daily Decode | ImignarX</title>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <div class="brand">
-        <h1 data-translate-page="focus" data-translate-key="title">Daily Check-In</h1>
-        <p class="subtitle" data-translate-page="focus" data-translate-key="subtitle">A playful question journey for your daily self-discovery.</p>
-      </div>
 
-      <div id="questionCard" class="session-card">
-        <div class="progress-row">
-          <div class="progress-label" id="questionProgress">Question 1/10</div>
-          <div class="progress-percent" id="progressPercent">0%</div>
-        </div>
-        <div class="progress-bar">
-          <div id="progressFill" class="progress-fill"></div>
-        </div>
-        <div id="questionText" class="question-text">If procrastination paid salary, how wealthy would you be?</div>
-        <div id="answerOptions" class="answer-options">
-  <button class="option-card">🚀 Rocket Brain</button>
-  <button class="option-card">🦝 Side Quest Mode</button>
-  <button class="option-card">🐿️ Caffeinated Squirrel</button>
-  <button class="option-card">🦥 Professional Delayer</button>
+<div class="container">
+  <div class="card">
+
+```
+<div class="brand">
+  <h1>🧠 Daily Decode</h1>
+  <p class="subtitle">
+    Discover today's hidden archetype.
+  </p>
 </div>
-        <div class="controls">
-          <button id="skipButton" class="btn secondary" type="button">Skip</button>
-          <button id="nextButton" class="btn primary" type="button">Next</button>
-        </div>
-        <p id="answerFeedback" class="feedback"></p>
-      </div>
 
-      <div id="summaryContainer" class="summary-card hidden">
-        <h2 data-translate-page="focus" data-translate-key="completeTitle">Daily discovery complete</h2>
-        <div class="result-list">
-          <div class="result-block">
-            <div class="result-label" data-translate-page="focus" data-translate-key="mindWeatherLabel">Mind Weather</div>
-            <div id="mindWeatherValue" class="result-value"></div>
-          </div>
-          <div class="result-block">
-            <div class="result-label" data-translate-page="focus" data-translate-key="archetypeLabel">Archetype</div>
-            <div id="archetypeValue" class="result-value"></div>
-          </div>
-          <div class="result-block">
-            <div class="result-label" data-translate-page="focus" data-translate-key="observationLabel">Daily Observation</div>
-            <div id="observationValue" class="result-value"></div>
-          </div>
-          <div class="result-block">
-            <div class="result-label" data-translate-page="focus" data-translate-key="nightCompanionLabel">Night Companion</div>
-            <div id="nightCompanionValue" class="result-value"></div>
-          </div>
-        </div>
-        <button id="continueMirror" class="btn primary" type="button" data-translate-page="focus" data-translate-key="continueButton">See my mirror</button>
-      </div>
-    </div>
+<div class="session-card">
+
+  <div class="progress-row">
+    <div id="questionProgress">Question 1/10</div>
+    <div id="progressPercent">0%</div>
   </div>
 
-  <script src="app.js"></script>
-  <script>
-    const name = localStorage.getItem('imignarxName');
-    const dob = localStorage.getItem('imignarxDob');
-    if (!name || !dob) {
-      window.location.href = 'index.html';
-    }
+  <div class="progress-bar">
+    <div id="progressFill" class="progress-fill"></div>
+  </div>
 
-    const today = new Date().toISOString().slice(0, 10);
-    const STORAGE_KEY = 'imignarxDailySessions';
-    const QUESTIONS_PER_DAY = 10;
+  <div id="questionText" class="question-text">
+    Your brain's transportation today?
+  </div>
 
-    const questionBank = [
-      "If procrastination paid salary, how wealthy would you be?",
-      "How many tabs are currently open in your brain?",
-      "If your bed filed a complaint, what would it say?",
-      "If your life had background music right now, what genre would it be?",
-      "Which snack would your future self thank you for right now?",
-      "If your thoughts were a browser, which tab is playing the loudest?",
-      "What superhero sidekick would your mood choose today?",
-      "If your energy had a hairstyle, what would it look like?",
-      "If your to-do list were a movie, what would the title be?",
-      "Which emoji best describes your current vibe?",
-      "If you could outsource one daily habit, what would it be?",
-      "What would your coffee say if it could speak?",
-      "If your room had a personality, what would it whisper?",
-      "Which word would your alarm clock use to describe you?",
-      "If your brain had a wallpaper, what would the pattern be?",
-      "What would a pizza slice say about your priorities?",
-      "If your focus were a pet, what kind of animal would it be?",
-      "What small victory deserves a confetti parade today?",
-      "Which two emojis are having a conversation in your head?",
-      "If your calendar could gossip, what would it tell your friends?",
-      "What slogan belongs on your current mood T-shirt?",
-      "If your ideas were plants, which ones need watering?",
-      "What is your inner voice’s best one-liner right now?",
-      "If today were a weather forecast, what would it predict?",
-      "Which color would your motivation paint itself?",
-      "If you had a doppelgänger for one task, what would it do?",
-      "What would your time management app rate you today?",
-      "If your brain were a radio station, what would it be playing?",
-      "What would your coffee mug write on its forehead about you?",
-      "If you could name one sneaky distraction, what is it?",
-      "What pretend award would you give yesterday?",
-      "If your attention span were a playlist, how many songs long is it?",
-      "Which emoji should be banned from your day?",
-      "If your dreams sent a postcard, what would it say?",
-      "What would your favorite snack choose if it were on a menu?",
-      "If you had a mood theme song, what's the first line?",
-      "What would your future self caption this moment?",
-      "If you could hide one thing in your pocket, what would it be?",
-      "What would your pet think if it could read your planner?",
-      "If your brain had a headquarters, what would the sign say?",
-      "What would your coffee make a toast to?",
-      "If you were a gadget, what feature would be most broken?",
-      "What would the calendar say to motivate you today?",
-      "If your stamina were a flavor, what would it taste like?",
-      "What phrase would your inbox be repeating right now?",
-      "If you could create a silly emoji for today, what would it be?",
-      "What would your goals sound like as a band name?",
-      "If your plans were a snack, would they be spicy, sweet, or salty?",
-      "What would your productivity choose as a mascot?",
-      "If your brain had a pet cloud, what would it be named?",
-      "Which tiny task deserves a trophy?",
-      "If you could invite one distraction to leave, which one?",
-      "If your mind were a vending machine, what would it dispense?",
-      "What would your backpack say about your day?",
-      "If you could fast-forward one hour, what would happen?",
-      "What secret skill would your schedule reveal?",
-      "If your focus were a hat, what color would it be?",
-      "What would your favorite song notice about today?",
-      "If your to-do list had a mood, what is it?",
-      "What cartoon character would narrate your morning?",
-      "If your brain had a snack drawer, what's inside?",
-      "What would your watch say if it could cheer you on?",
-      "If you were a headline, what would today’s title read?",
-      "What would your morning coffee write in your notebook?",
-      "If your energy were an animal crossing a field, which one?",
-      "What would your workspace whisper about your focus?",
-      "If your brain had a fortune cookie, what would it say?",
-      "What would your favorite pen tell you to write first?",
-      "If your schedule could wear shoes, what style would it choose?",
-      "What would your snack drawer think of your choices?",
-      "If your brain had a playlist, which song is playing on repeat?",
-      "What would your pajamas say about your ambitions?",
-      "If you were a badge, what would today’s badge say?",
-      "What fuzzy idea needs a little polish?",
-      "If your thoughts were a school subject, which one would it be?",
-      "What would your next break feel like if it were a sound?",
-      "If your mind could choose a superhero name, what is it?",
-      "What would your coffee say after today’s first sip?",
-      "If your brain had a hobby, what would it be?",
-      "What would your inner critic say if it sounded like a comedian?",
-      "If your mood could drive a vehicle, what would it be?",
-      "What would your to-do list choose as its ringtone?",
-      "If your focus had a flavor, what would it taste like?",
-      "What small thing would make your day shine a bit more?",
-      "If your brain were a landscape, what would the terrain look like?",
-      "What would your schedule put on a Post-it note?",
-      "If your productivity could be bottled, what label would it have?",
-      "What silly habit would you turn into a superpower?",
-      "If you could send your energy an emoji, which one?",
-      "What would your laptop say if it could complain?",
-      "If your thoughts were clouds, what shape are they today?",
-      "What snack would your confidence choose right now?",
-      "If your to-do list had a motto, what would it be?",
-      "What would your focus do if it got a surprise gift?",
-      "If your brain had a chat group, what would the name be?",
-      "What would your current mood order from a coffee shop?",
-      "If your day needed a mascot, what creature would it be?",
-      "What would your most used app say about your energy?",
-      "If you could teach your brain one trick, what would it be?",
-      "What would your morning routine say if it were a poem?",
-      "If your concentration were a game, what level are you on?",
-      "What would your thoughts sound like if they were a podcast title?",
-      "If your focus had a flavor, is it bold, mellow, or sparkling?",
-      "What would your lunch break say about your ambitions?",
-      "If your brain had a favorite hat, what would it look like?",
-      "What would your next idea be if it arrived as a headline?",
-      "If your mood had a mascot, what would it be wearing?",
-      "What would your productivity reward sticker say?",
-      "If your day were a sketch, what would be the brightest color?",
-      "What would your energy do if it could take a quick vacation?",
-      "If your mind were a type of weather, what would it be?",
-      "What would your keyboard say if it could gossip?",
-      "If your focus could choose a soundtrack, what would it play?",
-      "What would your coffee whisper before your first sip?",
-      "If your thoughts were room decor, what would be hanging?",
-      "What would your day’s vibe wear as an accessory?",
-      "If your brain were a cartoon, what kind would it be?",
-      "What would your to-do list say in a tweet?",
-      "If your energy had a color palette, what colors are there?",
-      "What would your mood rate today on a scale of one to superhero?",
-      "If your focus had a flavor, would it be citrus, chocolate, or spice?",
-      "What would your ideas have as a team name?",
-      "If your morning mind were a hat, what style would it choose?",
-      "What would your day’s soundtrack start with?",
-      "If your brain could taste a color, which one would it choose?",
-      "What would your current vibe send as a sticker?",
-      "If your focus were a snack, what would it be?",
-      "What would your energy write on a greeting card to yourself?",
-      "If your day were a party theme, what would the headline be?",
-      "What would your to-do list say if it asked for applause?",
-      "If your mood were a cozy blanket, what pattern would it have?",
-      "What would your imagination choose to explore next?",
-      "If your brain were a game character, what would its special move be?",
-      "What would your schedule say if it were giving advice?",
-      "If your attention were a pet, what name would it have?",
-      "What would your day give a gold star for?",
-      "If your focus could grow a garden, what would be planted?",
-      "What would your notebook say if it could cheer you on?",
-      "If your vibe had a mascot, what would it be carrying?",
-      "What would your inner narrator say in a movie trailer?",
-      "If your day were a comic strip, which panel would be the punchline?",
-      "What would your energy tell your future self?",
-      "If your brain had a secret handshake, what would it be?",
-      "What would your next break look like if it were a mini celebration?",
-      "If your focus were a landmark, what would it be?",
-      "What would your thoughts do if they could take a selfie?",
-      "If your mood were a pair of shoes, what style would it wear?",
-      "What would your day ask for if it could make one wish?",
-      "If your attention had a mascot, would it be a squirrel, panda, or owl?",
-      "What would your brain rate as its funniest moment so far today?"
-    ];
+  <div class="answer-options">
 
-    function loadSessions() {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      try {
-        return stored ? JSON.parse(stored) : {};
-      } catch (e) {
-        return {};
-      }
-    }
+    <button class="option-card">
+      🚀 Rocket
+    </button>
 
-    function saveSessions(sessions) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
-    }
+    <button class="option-card">
+      🚗 Reliable Sedan
+    </button>
 
-    function seedFromString(value) {
-      let seed = 0;
-      for (let i = 0; i < value.length; i += 1) {
-        seed = (seed * 31 + value.charCodeAt(i)) % 2147483647;
-      }
-      return seed;
-    }
+    <button class="option-card">
+      🛺 Rickshaw Missing A Wheel
+    </button>
 
-    function randomFromSeed(seed) {
-      return (seed = (seed * 16807) % 2147483647) / 2147483647;
-    }
+    <button class="option-card">
+      🦄 Teleporting Unicorn
+    </button>
 
-    function getQuestionIndices(dateString) {
-      const seed = seedFromString(dateString);
-      const indices = questionBank.map((_, index) => index);
-      let currentSeed = seed;
-      for (let i = indices.length - 1; i > 0; i -= 1) {
-        currentSeed = randomFromSeed(currentSeed) * 2147483647;
-        const j = Math.floor((currentSeed / 2147483647) * (i + 1));
-        [indices[i], indices[j]] = [indices[j], indices[i]];
-      }
-      return indices.slice(0, QUESTIONS_PER_DAY);
-    }
+  </div>
 
-    function createSession() {
-      return {
-        date: today,
-        questionIndices: getQuestionIndices(today),
-        answers: Array(QUESTIONS_PER_DAY).fill(''),
-        currentIndex: 0,
-        finished: false,
-        mindWeather: '',
-        archetype: '',
-        observation: '',
-        nightCompanion: '',
-      };
-    }
+  <div class="controls">
+    <button class="btn secondary">
+      Skip
+    </button>
 
-    function getSession() {
-      const sessions = loadSessions();
-      if (sessions[today]) {
-        return sessions[today];
-      }
-      const session = createSession();
-      sessions[today] = session;
-      saveSessions(sessions);
-      return session;
-    }
+    <button class="btn primary">
+      Next
+    </button>
+  </div>
 
-    function saveSession(session) {
-      const sessions = loadSessions();
-      sessions[session.date] = session;
-      saveSessions(sessions);
-    }
+</div>
+```
 
-    function getAnswerText(index) {
-      return questionBank[index] || '';
-    }
+  </div>
+</div>
 
-    function updateProgress(session) {
-      const questionProgress = document.getElementById('questionProgress');
-      const progressPercent = document.getElementById('progressPercent');
-      const progressFill = document.getElementById('progressFill');
-      const questionNumber = Math.min(session.currentIndex + 1, QUESTIONS_PER_DAY);
-      questionProgress.textContent = `Question ${questionNumber}/${QUESTIONS_PER_DAY}`;
-      const percent = Math.round((questionNumber - 1) / QUESTIONS_PER_DAY * 100);
-      progressPercent.textContent = `${percent}%`;
-      progressFill.style.width = `${percent}%`;
-    }
+<script src="app.js"></script>
 
-    function showQuestion(session) {
-      const questionText = document.getElementById('questionText');
-      const answerInput = document.getElementById('answerInput');
-      const answerFeedback = document.getElementById('answerFeedback');
-      const currentQuestionIndex = session.questionIndices[session.currentIndex];
-      questionText.textContent = getAnswerText(currentQuestionIndex);
-      answerInput.value = session.answers[session.currentIndex] || '';
-      answerInput.focus();
-      answerFeedback.textContent = '';
-      updateProgress(session);
-    }
-
-    function makeMindWeather(answers) {
-      const combined = answers.join(' ').toLowerCase();
-      const patterns = [
-        { label: 'Laser Focus', words: ['laser', 'sharp', 'zoned', 'locked', 'focused'] },
-        { label: 'Mostly Focused', words: ['mostly', 'steady', 'okay', 'together', 'solid'] },
-        { label: 'Mild Chaos', words: ['chaos', 'mess', 'scramble', 'wild', 'spin'] },
-        { label: 'Brain Fog', words: ['fog', 'sleepy', 'dazed', 'blur', 'slow'] },
-      ];
-      const match = patterns.find((pattern) => pattern.words.some((word) => combined.includes(word)));
-      return match ? match.label : 'Unexpected Genius';
-    }
-
-    function makeArchetype(answers) {
-      const combined = answers.join(' ').toLowerCase();
-      const archetypes = [
-        { label: 'Chaos Manager', words: ['chaos', 'tabs', 'scramble', 'wild'] },
-        { label: 'Side Quest Collector', words: ['side quest', 'extra', 'bonus', 'detour'] },
-        { label: 'Strategic Panda', words: ['strategy', 'plan', 'think', 'smart'] },
-        { label: 'Calm Navigator', words: ['calm', 'steady', 'slow', 'balance'] },
-        { label: 'Caffeinated Squirrel', words: ['coffee', 'caffeinated', 'zoom', 'energy'] },
-        { label: 'Professional Tab Opener', words: ['tab', 'browser', 'open', 'research'] },
-      ];
-      const match = archetypes.find((archetype) => archetype.words.some((word) => combined.includes(word)));
-      if (match) return match.label;
-      return archetypes[Math.floor(Math.random() * archetypes.length)].label;
-    }
-
-    function makeObservation(answers) {
-      const combined = answers.join(' ').toLowerCase();
-      const observations = [
-        { text: 'You appear to enjoy collecting tasks more than completing them.', words: ['tabs', 'list', 'extra'] },
-        { text: 'Your optimism increases significantly after snacks.', words: ['snack', 'coffee', 'treat'] },
-        { text: 'Your brain enjoys side quests.', words: ['side', 'explore', 'extra'] },
-        { text: 'You may be one thoughtful shortcut away from a brilliant idea.', words: ['idea', 'thought', 'plan'] },
-        { text: 'The most interesting part of today is probably the punctuation on your answer.', words: ['.', '!', '?'] },
-      ];
-      const matched = observations.find((entry) => entry.words.some((word) => combined.includes(word)));
-      if (matched) return matched.text;
-      return ['You are uniquely skilled at making even simple days feel interesting.', 'Somewhere between a genius and an adventurer, your day is choosing both.', 'Your brain is more curious than confused today.'][Math.floor(Math.random() * 3)];
-    }
-
-    function pickNightCompanion() {
-      const messages = [
-        'Today’s problems survived: 0',
-        'You survived: 100%',
-        'The universe has not assigned homework tonight.',
-        'Progress invisible to you is still progress.',
-        'Rest is productive too.',
-        'You made it this far with style and a little bit of chaos.',
-        'Tomorrow is allowed to be a softer version of today.',
-      ];
-      return messages[Math.floor(Math.random() * messages.length)];
-    }
-
-    function renderSummary(session) {
-      document.getElementById('questionCard').classList.add('hidden');
-      document.getElementById('summaryContainer').classList.remove('hidden');
-      document.getElementById('mindWeatherValue').textContent = session.mindWeather;
-      document.getElementById('archetypeValue').textContent = session.archetype;
-      document.getElementById('observationValue').textContent = session.observation;
-      document.getElementById('nightCompanionValue').textContent = session.nightCompanion;
-    }
-
-    function completeSession(session) {
-      session.finished = true;
-      session.mindWeather = makeMindWeather(session.answers);
-      session.archetype = makeArchetype(session.answers);
-      session.observation = makeObservation(session.answers);
-      session.nightCompanion = pickNightCompanion();
-      saveSession(session);
-      renderSummary(session);
-    }
-
-    function initialize() {
-      const session = getSession();
-      const summaryContainer = document.getElementById('summaryContainer');
-      const questionCard = document.getElementById('questionCard');
-
-      document.getElementById('answerInput').placeholder = translate('focus', 'answerPlaceholder');
-      document.getElementById('nextButton').textContent = translate('focus', 'nextButton');
-      document.getElementById('skipButton').textContent = translate('focus', 'skipButton');
-      document.getElementById('continueMirror').textContent = translate('focus', 'continueButton');
-
-      if (session.finished) {
-        questionCard.classList.add('hidden');
-        summaryContainer.classList.remove('hidden');
-        renderSummary(session);
-        return;
-      }
-
-      questionCard.classList.remove('hidden');
-      summaryContainer.classList.add('hidden');
-      showQuestion(session);
-
-      document.getElementById('nextButton').addEventListener('click', () => {
-        const answerInput = document.getElementById('answerInput');
-        session.answers[session.currentIndex] = answerInput.value.trim();
-        session.currentIndex += 1;
-        if (session.currentIndex >= QUESTIONS_PER_DAY) {
-          completeSession(session);
-          return;
-        }
-        saveSession(session);
-        showQuestion(session);
-      });
-
-      document.getElementById('skipButton').addEventListener('click', () => {
-        session.answers[session.currentIndex] = '';
-        session.currentIndex += 1;
-        if (session.currentIndex >= QUESTIONS_PER_DAY) {
-          completeSession(session);
-          return;
-        }
-        saveSession(session);
-        showQuestion(session);
-      });
-
-      document.getElementById('answerInput').addEventListener('input', () => {
-        document.getElementById('answerFeedback').textContent = '';
-      });
-
-      document.getElementById('continueMirror').addEventListener('click', () => {
-        window.location.href = 'mirror.html';
-      });
-    }
-
-    initialize();
-  </script>
 </body>
 </html>
