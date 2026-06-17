@@ -3,78 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b1220" />
-  <link rel="manifest" href="manifest.json" />
+  <title>ImignarX Onboarding</title>
   <link rel="stylesheet" href="style.css" />
-  <title>ImignarX</title>
 </head>
 <body>
-
   <div class="container">
-
-    <div class="card">
-
+    <div class="panel">
       <div class="brand">
-        <h1>ImignarX</h1>
-        <p class="subtitle">
-          Know yourself better, one day at a time.
-        </p>
-
-        <p class="trust-line">
-          Your information stays private and helps personalize your daily reflections.
-        </p>
+        <div class="brand-mark">IX</div>
+        <div>
+          <p class="brand-title">ImignarX</p>
+          <p class="brand-subtitle">Welcome to your onboarding</p>
+        </div>
       </div>
 
-      <form id="onboard-form">
+      <form id="onboardingForm" class="form-card">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required />
 
-        <label>Name</label>
-        <input
-          type="text"
-          id="name"
-          placeholder="Enter your name"
-          required
-        />
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required />
 
-        <label>Date of Birth</label>
-        <input
-          type="date"
-          id="dob"
-          required
-        />
-
-        <label for="language">Preferred Language</label>
-        <p id="detected-language" style="margin:6px 0 8px; color: #a6b0c3;">Detected Language: English</p>
-        <button id="change-language-btn" type="button" class="small-btn" style="margin-bottom:8px;">Change Language</button>
-        <select id="language" name="language" style="display:none;">
-          <option value="English">English</option>
-          <option value="Hindi">हिन्दी (Hindi)</option>
-          <option value="Marathi">मराठी (Marathi)</option>
-          <option value="Gujarati">ગુજરાતી (Gujarati)</option>
-          <option value="Urdu">اردو (Urdu)</option>
-          <option value="Spanish">Español (Spanish)</option>
-          <option value="French">Français (French)</option>
-          <option value="German">Deutsch (German)</option>
-          <option value="Japanese">日本語 (Japanese)</option>
-          <option value="Korean">한국어 (Korean)</option>
-          <option value="Chinese">中文 (Chinese)</option>
-          <option value="Portuguese">Português (Portuguese)</option>
-          <option value="Russian">Русский (Russian)</option>
-          <option value="Italian">Italiano (Italian)</option>
-        </select>
-
-        <button type="submit">
-          Begin
-        </button>
-
-        <p id="feedback"></p>
-
+        <button type="submit" class="primary-btn">Begin</button>
       </form>
 
+      <p class="note">Your privacy is respected. We only use this information for a better experience.</p>
     </div>
-
   </div>
 
   <script src="app.js"></script>
-
 </body>
 </html>
+Update index.html
