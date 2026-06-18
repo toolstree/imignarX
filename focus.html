@@ -62,8 +62,6 @@ small habits become giant destinies.
 
 🃏 TAP TO REVEAL
 
-</div>
-
   <div id="optionsContainer" class="answer-options">
 
   </div>
@@ -119,9 +117,6 @@ small habits become giant destinies.
   </button>
 
 </div>
-
-
-  </div>
 
 </div>
 
@@ -269,6 +264,12 @@ const q = QUESTIONS[currentQuestion];
 revealed = false;
 questionText.textContent =
 "🃏 TAP TO REVEAL";
+  const ad =
+document.getElementById("questionAd");
+
+if(ad){
+ad.style.display = "block";
+}
 
 questionCounter.textContent =
 `Question ${currentQuestion+1}/10`;
@@ -325,10 +326,12 @@ typeof QUESTIONS[currentQuestion].question === "object"
 ? QUESTIONS[currentQuestion].question[lang]
 : QUESTIONS[currentQuestion].question;
   document
-document
-.getElementById("questionAd")
-.style.display = "none";
-  
+const ad =
+document.getElementById("questionAd");
+
+if(ad){
+ad.style.display = "none";
+}  
 });
   
 renderQuestion();
