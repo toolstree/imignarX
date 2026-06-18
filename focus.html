@@ -301,30 +301,17 @@ optionsContainer.appendChild(btn);
 
 }
 let revealed = false;
-
-questionText.addEventListener(
-"click",
-()=>{
+  questionText.onclick = function(){
 
 if(revealed) return;
 
 revealed = true;
 
-questionText.style.transform =
-"rotateY(180deg)";
-
-setTimeout(()=>{
-
 questionText.textContent =
 QUESTIONS[currentQuestion].question;
 
-questionText.style.transform =
-"rotateY(0deg)";
-
-},300);
-
-}
-);
+};
+  
 renderQuestion();
 
 function getWinner() {
