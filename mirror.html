@@ -26,7 +26,11 @@
         <div class="result-card">
           <div class="result-label" data-translate-page="mirror" data-translate-key="archetypeLabel">Archetype</div>
           <div id="archetypeValue" class="result-value"></div>
-        </div>
+          <div
+          id="rarityValue"
+          class="small-text">
+          🏆 Rarity
+          </div>
         <div class="result-card full-width">
           <div class="result-label" data-translate-page="mirror" data-translate-key="observationLabel">Daily Observation</div>
           <div id="observationValue" class="result-value"></div>
@@ -84,6 +88,11 @@ document.getElementById(
 "archetypeValue"
 ).textContent =
 result.archetype || "🦝 Explorer";
+document.getElementById(
+"rarityValue"
+).textContent =
+"🏆 Rarity: " +
+(result.rarity || "Unknown");
 
 document.getElementById(
 "observationValue"
