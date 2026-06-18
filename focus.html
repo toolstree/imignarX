@@ -44,9 +44,13 @@
     <div id="progressFill" class="progress-fill"></div>
   </div>
 
-  <div id="questionText" class="question-text">
+  <div
+id="questionCard"
+class="question-text">
 
-  </div>
+🃏 TAP TO REVEAL
+
+</div>
 
   <div id="optionsContainer" class="answer-options">
 
@@ -242,12 +246,14 @@ document.getElementById("progressFill");
 
 const progressPercent =
 document.getElementById("progressPercent");
+let revealed = false;
 
-function renderQuestion(){
+function renderQuestion(){ 
 
 const q = QUESTIONS[currentQuestion];
 
-questionText.textContent = q.question;
+questionText.textContent =
+"🃏 TAP TO REVEAL";
 
 questionCounter.textContent =
 `Question ${currentQuestion+1}/10`;
@@ -294,7 +300,31 @@ optionsContainer.appendChild(btn);
 });
 
 }
+let revealed = false;
 
+questionText.addEventListener(
+"click",
+()=>{
+
+if(revealed) return;
+
+revealed = true;
+
+questionText.style.transform =
+"rotateY(180deg)";
+
+setTimeout(()=>{
+
+questionText.textContent =
+QUESTIONS[currentQuestion].question;
+
+questionText.style.transform =
+"rotateY(0deg)";
+
+},300);
+
+}
+);
 renderQuestion();
 
 function getWinner() {
