@@ -343,3 +343,37 @@ link.click();
 });
 
 };
+let sessionCount = 0;
+
+const quotes = [
+"Clarity comes when noise stops.",
+"You are not behind, you are aligning.",
+"Rest is part of progress.",
+"Small steps still move forward.",
+"Your mind also needs silence."
+];
+
+function randomQuote(){
+return quotes[Math.floor(Math.random()*quotes.length)];
+}
+
+function maybeTriggerExit(){
+
+sessionCount++;
+
+if(sessionCount >= 10){
+
+document.getElementById("quizContainer").classList.add("hidden");
+document.getElementById("exitScreen").classList.remove("hidden");
+
+document.getElementById("finalScoreText").textContent =
+"Your session score shows active exploration mode.";
+
+document.getElementById("quoteBox").textContent =
+"✨ " + randomQuote();
+
+return true;
+}
+
+return false;
+}
