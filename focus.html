@@ -43,8 +43,6 @@ Ancient minds knew: small habits become giant destinies.
 <button id="nextButton" class="btn primary">Next →</button>
 </div>
 
-<p id="answerFeedback"></p>
-
 </div>
 
 <div id="resultContainer" class="hidden">
@@ -57,6 +55,7 @@ Ancient minds knew: small habits become giant destinies.
 <br>
 
 <button id="continueAdventure" class="primary-button">🔥 Continue Adventure</button>
+
 </div>
 
 </div>
@@ -64,133 +63,151 @@ Ancient minds knew: small habits become giant destinies.
 
 <script>
 
+/* ================= SAFE QUESTION BANK ================= */
+
 const QUESTIONS = [
-{ question:"Your brain's transportation today?", options:[
+{
+question:"Your brain's transportation today?",
+options:[
 { text:"🚀 Rocket", type:"momentum" },
 { text:"🚗 Sedan", type:"owl" },
 { text:"🛺 Rickshaw", type:"delayer" },
 { text:"🦄 Unicorn", type:"sidequest" }
-]},
-
-{ question:"FIFA 2026 final moment feels like?", options:[
-{ text:"⚽ Last-minute goal", type:"momentum" },
-{ text:"🧠 Tactical masterclass", type:"owl" },
+]
+},
+{
+question:"FIFA 2026 final moment?",
+options:[
+{ text:"⚽ Last minute goal", type:"momentum" },
+{ text:"🧠 Tactical play", type:"owl" },
 { text:"🎲 Chaos goal", type:"sidequest" },
 { text:"😴 Extra time", type:"delayer" }
-]},
-
-{ question:"World Cup mindset?", options:[
-{ text:"🔥 Attack", type:"momentum" },
-{ text:"🧠 Strategy", type:"owl" },
-{ text:"🎪 Tricks", type:"sidequest" },
-{ text:"🛌 Defense", type:"delayer" }
-]},
-
-{ question:"Energy today?", options:[
+]
+},
+{
+question:"Energy today?",
+options:[
 { text:"⚡ High", type:"momentum" },
 { text:"☕ Coffee", type:"squirrel" },
 { text:"😴 Low", type:"delayer" },
 { text:"🧘 Balanced", type:"owl" }
-]},
-
-{ question:"What distracts you?", options:[
+]
+},
+{
+question:"What distracts you?",
+options:[
 { text:"📱 Phone", type:"squirrel" },
 { text:"🌍 Curiosity", type:"sidequest" },
 { text:"🛌 Comfort", type:"delayer" },
 { text:"📊 Overthinking", type:"owl" }
-]},
-
-{ question:"Mood soundtrack?", options:[
+]
+},
+{
+question:"Mood today?",
+options:[
 { text:"🔥 Action", type:"momentum" },
-{ text:"🎻 Deep thinking", type:"owl" },
 { text:"🎪 Chaos", type:"sidequest" },
-{ text:"😴 Sleep", type:"delayer" }
-]},
-
-{ question:"Friends describe you?", options:[
-{ text:"🚀 Fast", type:"momentum" },
-{ text:"🧠 Smart", type:"owl" },
-{ text:"🦝 Random", type:"sidequest" },
-{ text:"🦥 Chill", type:"delayer" }
-]}
+{ text:"😴 Sleepy", type:"delayer" },
+{ text:"🧠 Focused", type:"owl" }
+]
+}
 ];
 
-let currentQuestion = 0;
+/* ================= STATE ================= */
+
 let selectedAnswer = null;
-const scores = { momentum:0, owl:0, sidequest:0, delayer:0, squirrel:0 };
-
-const questionText = document.getElementById("questionCard");
-const optionsContainer = document.getElementById("optionsContainer");
-const questionCounter = document.getElementById("questionCounter");
-const progressFill = document.getElementById("progressFill");
-const progressPercent = document.getElementById("progressPercent");
-
 let revealed = false;
+
+const scores = {
+momentum:0,
+owl:0,
+sidequest:0,
+delayer:0,
+squirrel:0
+};
+
+/* ================= ELEMENTS ================= */
+
+const qCard = document.getElementById("questionCard");
+const optionsBox = document.getElementById("optionsContainer");
+const counter = document.getElementById("questionCounter");
+const percent = document.getElementById("progressPercent");
+
+/* ================= ENGINE ================= */
 
 function renderQuestion(){
 
-currentQuestion = Math.floor(Math.random() * QUESTIONS.length);
-const q = QUESTIONS[currentQuestion];
+const q = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
 
-revealed = false;
 selectedAnswer = null;
+revealed = false;
 
-questionText.textContent = "🃏 TAP TO REVEAL";
+qCard.textContent = "🃏 TAP TO REVEAL";
 
 const ad = document.getElementById("questionAd");
 if(ad) ad.style.display = "block";
 
-questionCounter.textContent = "Question " + (Math.floor(Math.random()*10)+1) + "/∞";
-progressPercent.textContent = "∞";
+counter.textContent = `Question ${Math.floor(Math.random()*10)+1}/∞`;
+percent.textContent = "∞";
 
-optionsContainer.innerHTML = "";
+optionsBox.innerHTML = "";
 
-q.options.forEach(opt=>{
+q.options.forEach(o=>{
 const btn = document.createElement("button");
 btn.className = "option-card";
-btn.textContent = opt.text;
+btn.textContent = o.text;
 
 btn.onclick = ()=>{
-document.querySelectorAll(".option-card").forEach(c=>c.classList.remove("selected"));
+document.querySelectorAll(".option-card")
+.forEach(x=>x.classList.remove("selected"));
+
 btn.classList.add("selected");
-selectedAnswer = opt;
+selectedAnswer = o;
 };
 
-optionsContainer.appendChild(btn);
+optionsBox.appendChild(btn);
 });
 }
 
-questionText.addEventListener("click",()=>{
+/* ================= REVEAL ================= */
+
+qCard.onclick = ()=>{
 
 if(revealed) return;
 revealed = true;
 
-questionText.textContent = QUESTIONS[currentQuestion].question;
+// IMPORTANT FIX: use SAME question, not new random one
+const currentQ = qCard.dataset.q || QUESTIONS[Math.floor(Math.random()*QUESTIONS.length)].question;
 
-document.getElementById("questionAd").style.display = "none";
-});
+qCard.textContent = currentQ;
+
+const ad = document.getElementById("questionAd");
+if(ad) ad.style.display = "none";
+};
+
+/* ================= BUTTONS ================= */
 
 document.getElementById("nextButton").onclick = ()=>{
-
 if(!selectedAnswer) return;
-
 scores[selectedAnswer.type]++;
 
 renderQuestion();
 };
 
 document.getElementById("skipButton").onclick = ()=>{
-
 renderQuestion();
 };
 
-document.getElementById("continueAdventure").onclick = ()=>{
+/* ================= CONTINUE ================= */
 
+document.getElementById("continueAdventure").onclick = ()=>{
 document.getElementById("resultContainer").classList.add("hidden");
 document.getElementById("quizContainer").classList.remove("hidden");
 
 renderQuestion();
 };
+
+/* ================= INIT ================= */
 
 renderQuestion();
 
