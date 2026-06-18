@@ -1,236 +1,175 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1220">
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
-  <title>🧠 Daily Decode | ImignarX</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1220">
+<link rel="stylesheet" href="style.css">
+<title>🧠 Daily Decode | ImignarX</title>
 </head>
 
 <body>
 
 <div class="container">
-
-  <div class="card">
+<div class="card">
 
 <div class="brand">
-
-  <h1>🧠 Daily Decode</h1>
-
-  <p class="subtitle">
-    Discover what creature is secretly operating your brain today.
-  </p>
-
+<h1>🧠 Daily Decode</h1>
+<p class="subtitle">Discover what creature is secretly operating your brain today.</p>
 </div>
 
 <div id="quizContainer">
 
-  <div class="progress-row">
-
-    <div id="questionCounter" class="progress-label">
-      Question 1/10
-    </div>
-
-    <div id="progressPercent" class="progress-percent">
-      10%
-    </div>
-
-  </div>
-
-  <div class="progress-bar">
-    <div id="progressFill" class="progress-fill"></div>
-  </div>
-
-  <div
-id="questionCard"
-class="question-text">
-    🃏 TAP TO REVEAL
-    
-  
-</div>
-  
-<div id="questionAd" class="question-ad">
-🏺 Sponsored Discovery
-
-Ancient minds knew:
-small habits become giant destinies.
-
+<div class="progress-row">
+<div id="questionCounter" class="progress-label">Question 1/10</div>
+<div id="progressPercent" class="progress-percent">10%</div>
 </div>
 
+<div class="progress-bar">
+<div id="progressFill" class="progress-fill"></div>
+</div>
+
+<div id="questionCard" class="question-text">
 🃏 TAP TO REVEAL
+</div>
 
-  <div id="optionsContainer" class="answer-options">
+<div id="questionAd" class="question-ad">
+🏺 Sponsored Discovery<br><br>
+Ancient minds knew: small habits become giant destinies.
+</div>
 
-  </div>
+<div id="optionsContainer" class="answer-options"></div>
 
-  <div class="controls">
+<div class="controls">
+<button id="skipButton" class="btn secondary">Skip</button>
+<button id="nextButton" class="btn primary">Next →</button>
+</div>
 
-    <button id="skipButton" class="btn secondary">
-      Skip
-    </button>
-
-    <button id="nextButton" class="btn primary">
-      Next →
-    </button>
-
-  </div>
-
-  <p id="answerFeedback" class="feedback"></p>
+<p id="answerFeedback" class="feedback"></p>
 
 </div>
 
 <div id="resultContainer" class="hidden">
 
-  <div class="collectible-card">
+<div class="collectible-card">
+<div id="resultArchetype" class="archetype-display">🦝 Side Quest Collector</div>
+<br>
+<div id="resultWeather" class="mind-weather-display">⛅ Mild Chaos</div>
+<br>
+<div id="resultObservation" class="result-value"></div>
+<br>
+<div id="resultCompanion" class="result-value"></div>
+</div>
 
-    <div id="resultArchetype" class="archetype-display">
-      🦝 Side Quest Collector
-    </div>
+<br>
 
-    <br>
-
-    <div id="resultWeather" class="mind-weather-display">
-      ⛅ Mild Chaos
-    </div>
-
-    <br>
-
-    <div id="resultObservation" class="result-value">
-
-    </div>
-
-    <br>
-
-    <div id="resultCompanion" class="result-value">
-
-    </div>
-
-  </div>
-
-  <br>
-
-  <button id="continueAdventure" class="primary-button">
-  🔥 Continue Adventure
-</button>
-
+<button id="continueAdventure" class="primary-button">🔥 Continue Adventure</button>
 <br><br>
-
-<button id="continueButton" class="btn secondary">
-  🪞 See My Mirror
-</button>
+<button id="continueButton" class="btn secondary">🪞 See My Mirror</button>
 
 </div>
 
 </div>
-
-<script src="app.js"></script>
+</div>
 
 <script>
 
 const QUESTIONS = [
 
-{
-question: "Your brain's transportation today?",
-options: [
+/* ===== CORE ===== */
+{ question:"Your brain's transportation today?", options:[
 { text:"🚀 Rocket", type:"momentum" },
-{ text:"🚗 Reliable Sedan", type:"owl" },
-{ text:"🛺 Rickshaw Missing A Wheel", type:"delayer" },
-{ text:"🦄 Teleporting Unicorn", type:"sidequest" }
-]
-},
+{ text:"🚗 Sedan", type:"owl" },
+{ text:"🛺 Rickshaw", type:"delayer" },
+{ text:"🦄 Unicorn", type:"sidequest" }
+]},
 
-{
-question: "How many tabs are open in your head?",
-options: [
-{ text:"😀 3", type:"owl" },
-{ text:"😅 17", type:"sidequest" },
-{ text:"🤯 58", type:"squirrel" },
-{ text:"👽 Unknown", type:"delayer" }
-]
-},
+{ question:"How many tabs are open in your head?", options:[
+{ text:"3", type:"owl" },
+{ text:"17", type:"sidequest" },
+{ text:"58", type:"squirrel" },
+{ text:"Unknown", type:"delayer" }
+]},
 
-{
-question: "Today's productivity mascot?",
-options: [
+{ question:"Today's productivity mascot?", options:[
 { text:"🐿️ Squirrel", type:"squirrel" },
 { text:"🦥 Sloth", type:"delayer" },
 { text:"🦅 Eagle", type:"momentum" },
 { text:"🐼 Panda", type:"owl" }
-]
-},
+]},
 
-{
-question: "Your to-do list currently feels like?",
-options: [
-{ text:"📜 Ancient Scroll", type:"sidequest" },
-{ text:"🎯 Mission Brief", type:"momentum" },
+/* ===== FIFA SET ===== */
+{ question:"FIFA 2026 final moment feels like?", options:[
+{ text:"⚽ Last-minute goal", type:"momentum" },
+{ text:"🧠 Tactical masterclass", type:"owl" },
+{ text:"🎲 Chaos own goal", type:"sidequest" },
+{ text:"😴 Extra time snooze", type:"delayer" }
+]},
+
+{ question:"Your World Cup mindset is?", options:[
+{ text:"🔥 Attack mode", type:"momentum" },
+{ text:"🧠 Strategy first", type:"owl" },
+{ text:"🎪 Trick plays", type:"sidequest" },
+{ text:"🛌 Defense only", type:"delayer" }
+]},
+
+{ question:"If you were a FIFA player?", options:[
+{ text:"🚀 Speed winger", type:"momentum" },
+{ text:"🧠 Midfield brain", type:"owl" },
+{ text:"🎭 Dribble artist", type:"sidequest" },
+{ text:"🛡️ Defender", type:"delayer" }
+]},
+
+/* ===== LIFE CHAOS ===== */
+{ question:"Your to-do list feels like?", options:[
+{ text:"📜 Scroll", type:"sidequest" },
+{ text:"🎯 Mission", type:"momentum" },
 { text:"🛋️ Decoration", type:"delayer" },
 { text:"🧩 Puzzle", type:"owl" }
-]
-},
+]},
 
-{
-question: "Your energy level right now?",
-options: [
-{ text:"⚡ Unlimited", type:"momentum" },
-{ text:"☕ Running on Coffee", type:"squirrel" },
-{ text:"😴 Please Recharge", type:"delayer" },
-{ text:"🧘 Steady", type:"owl" }
-]
-},
+{ question:"Energy level today?", options:[
+{ text:"⚡ High", type:"momentum" },
+{ text:"☕ Coffee mode", type:"squirrel" },
+{ text:"😴 Low", type:"delayer" },
+{ text:"🧘 Balanced", type:"owl" }
+]},
 
-{
-question: "What usually distracts you?",
-options: [
+{ question:"What distracts you?", options:[
 { text:"📱 Phone", type:"squirrel" },
-{ text:"🌍 Random Curiosity", type:"sidequest" },
+{ text:"🌍 Curiosity", type:"sidequest" },
 { text:"🛌 Comfort", type:"delayer" },
 { text:"📊 Overthinking", type:"owl" }
-]
-},
+]},
 
-{
-question: "Your focus animal?",
-options: [
+{ question:"Focus animal?", options:[
 { text:"🦉 Owl", type:"owl" },
 { text:"🐿️ Squirrel", type:"squirrel" },
 { text:"🦝 Raccoon", type:"sidequest" },
 { text:"🦥 Sloth", type:"delayer" }
-]
-},
+]},
 
-{
-question: "How do you attack a problem?",
-options: [
-{ text:"🚀 Immediately", type:"momentum" },
-{ text:"🧠 Research First", type:"owl" },
-{ text:"🎲 Side Quest First", type:"sidequest" },
-{ text:"⏰ Tomorrow", type:"delayer" }
-]
-},
+{ question:"Problem solving style?", options:[
+{ text:"🚀 Instant", type:"momentum" },
+{ text:"🧠 Research", type:"owl" },
+{ text:"🎲 Chaos", type:"sidequest" },
+{ text:"⏰ Delay", type:"delayer" }
+]},
 
-{
-question: "Your mood soundtrack?",
-options: [
-{ text:"🔥 Action Movie", type:"momentum" },
-{ text:"🎻 Thinking Music", type:"owl" },
-{ text:"🎪 Circus Theme", type:"sidequest" },
-{ text:"😴 Lullaby", type:"delayer" }
-]
-},
+/* ===== EXTRA MIX ===== */
+{ question:"Mood soundtrack?", options:[
+{ text:"🔥 Action", type:"momentum" },
+{ text:"🎻 Deep thinking", type:"owl" },
+{ text:"🎪 Circus", type:"sidequest" },
+{ text:"😴 Sleep", type:"delayer" }
+]},
 
-{
-question: "How would friends describe today?",
-options: [
-{ text:"🚀 Productive", type:"momentum" },
-{ text:"🧠 Thoughtful", type:"owl" },
+{ question:"Friends describe you as?", options:[
+{ text:"🚀 Fast", type:"momentum" },
+{ text:"🧠 Smart", type:"owl" },
 { text:"🦝 Random", type:"sidequest" },
-{ text:"🦥 Relaxed", type:"delayer" }
-]
-}
+{ text:"🦥 Chill", type:"delayer" }
+]}
 
 ];
 
@@ -238,311 +177,122 @@ let currentQuestion = 0;
 let selectedAnswer = null;
 
 const scores = {
-momentum:0,
-owl:0,
-sidequest:0,
-delayer:0,
-squirrel:0
+momentum:0, owl:0, sidequest:0, delayer:0, squirrel:0
 };
 
-const questionText =
-document.getElementById("questionCard");
+const questionText = document.getElementById("questionCard");
+const optionsContainer = document.getElementById("optionsContainer");
+const questionCounter = document.getElementById("questionCounter");
+const progressFill = document.getElementById("progressFill");
+const progressPercent = document.getElementById("progressPercent");
 
-const optionsContainer =
-document.getElementById("optionsContainer");
-
-const questionCounter =
-document.getElementById("questionCounter");
-
-const progressFill =
-document.getElementById("progressFill");
-
-const progressPercent =
-document.getElementById("progressPercent");
 let revealed = false;
-const lang =
-localStorage.getItem("imignarxLanguage")
-|| "English";
+const lang = localStorage.getItem("imignarxLanguage") || "English";
 
-function renderQuestion(){ 
-
+function renderQuestion(){
 const q = QUESTIONS[currentQuestion];
 revealed = false;
-questionText.textContent =
-"🃏 TAP TO REVEAL";
-  const ad =
-document.getElementById("questionAd");
 
-if(ad){
-ad.style.display = "block";
-}
+questionText.textContent = "🃏 TAP TO REVEAL";
 
-questionCounter.textContent =
-`Question ${currentQuestion+1}/10`;
+const ad = document.getElementById("questionAd");
+if(ad) ad.style.display = "block";
 
-const percent =
-Math.round(((currentQuestion+1)/10)*100);
-
-progressPercent.textContent =
-`${percent}%`;
-
-progressFill.style.width =
-`${percent}%`;
+questionCounter.textContent = `Question ${currentQuestion+1}/10`;
+const percent = Math.round(((currentQuestion+1)/10)*100);
+progressPercent.textContent = `${percent}%`;
+progressFill.style.width = `${percent}%`;
 
 optionsContainer.innerHTML = "";
 
 q.options.forEach(option=>{
+const btn = document.createElement("button");
+btn.className = "option-card";
+btn.textContent = option.text;
 
-const btn =
-document.createElement("button");
-
-btn.className =
-"option-card";
-
-btn.textContent =
-option.text;
-
-btn.addEventListener("click",()=>{
-
-document
-.querySelectorAll(".option-card")
-.forEach(card=>
-card.classList.remove("selected")
-);
-
+btn.onclick = ()=>{
+document.querySelectorAll(".option-card").forEach(c=>c.classList.remove("selected"));
 btn.classList.add("selected");
-
-selectedAnswer =
-option;
-
-});
+selectedAnswer = option;
+};
 
 optionsContainer.appendChild(btn);
-
 });
-
 }
-questionText.addEventListener("click", function(){
 
+questionText.addEventListener("click",()=>{
 if(revealed) return;
-
 revealed = true;
+
 questionText.textContent =
 typeof QUESTIONS[currentQuestion].question === "object"
 ? QUESTIONS[currentQuestion].question[lang]
 : QUESTIONS[currentQuestion].question;
-  document
-const ad =
-document.getElementById("questionAd");
 
-if(ad){
-ad.style.display = "none";
-}  
+const ad = document.getElementById("questionAd");
+if(ad) ad.style.display = "none";
 });
-  
-renderQuestion();
 
-function getWinner() {
-
-let winner = "owl";
-let highest = 0;
-
-Object.keys(scores).forEach(key => {
-
-if(scores[key] > highest){
-highest = scores[key];
-winner = key;
+function getWinner(){
+let winner="owl",max=0;
+for(let k in scores){
+if(scores[k]>max){max=scores[k];winner=k;}
 }
-
-});
-
 return winner;
 }
 
 function buildResult(type){
-
-const results = {
-
-momentum:{
-archetype:"🚀 Momentum Machine",
-rarity:"11%",
-weather:"☀️ Full Throttle",
-observation:
-"You move before doubt can catch up. Today your biggest advantage is momentum.",
-companion:
-"Today's Problems: Present. Today's You: Faster."
-},
-
-owl:{
-archetype:"🦉 Strategic Owl",
-rarity:"24%",
-weather:"🌤️ Clear Thinking",
-observation:
-"You think before acting. Your superpower today is seeing patterns others miss.",
-companion:
-"Slow decisions beat rushed regrets."
-},
-
-sidequest:{
-archetype:"🦝 Side Quest Collector",
-rarity:"7%",
-weather:"⛅ Mild Chaos",
-observation:
-"You started three adventures and somehow found two more. Curiosity is winning.",
-companion:
-"You 1. Boredom 0."
-},
-
-delayer:{
-archetype:"🦥 Professional Delayer",
-rarity:"18%",
-weather:"🌥️ Cozy Fog",
-observation:
-"You prefer letting ideas marinate. Sometimes waiting is strategy, sometimes it's a nap.",
-companion:
-"Progress still counts even when it moves slowly."
-},
-
-squirrel:{
-archetype:"🐿️ Caffeinated Squirrel",
-rarity:"14%",
-weather:"⚡ Hyper Active",
-observation:
-"Your brain is sprinting through possibilities. Energy is not the problem today.",
-companion:
-"Remember: finishing also releases dopamine."
-}
-
+const r = {
+momentum:{archetype:"🚀 Momentum",weather:"☀️ Fast"},
+owl:{archetype:"🦉 Owl",weather:"🌤️ Calm"},
+sidequest:{archetype:"🦝 Chaos",weather:"⛅ Wild"},
+delayer:{archetype:"🦥 Delay",weather:"🌫️ Fog"},
+squirrel:{archetype:"🐿️ Squirrel",weather:"⚡ Hyper"}
 };
-
-return results[type];
+return r[type];
 }
 
 function showResult(){
+const res = buildResult(getWinner());
 
-const winner =
-getWinner();
+document.getElementById("quizContainer").classList.add("hidden");
+document.getElementById("resultContainer").classList.remove("hidden");
 
-const result =
-buildResult(winner);
-
-document
-.getElementById("quizContainer")
-.classList.add("hidden");
-
-document
-.getElementById("resultContainer")
-.classList.remove("hidden");
-
-document
-.getElementById("resultArchetype")
-.textContent =
-result.archetype;
-
-document
-.getElementById("resultWeather")
-.textContent =
-result.weather;
-
-document
-.getElementById("resultObservation")
-.textContent =
-result.observation;
-
-document
-.getElementById("resultCompanion")
-.textContent =
-result.companion;
-
-localStorage.setItem(
-"imignarxLatestResult",
-JSON.stringify(result)
-);
-
+document.getElementById("resultArchetype").textContent = res.archetype;
+document.getElementById("resultWeather").textContent = res.weather;
 }
 
-document
-.getElementById("nextButton")
-.addEventListener("click",()=>{
-
-if(!selectedAnswer){
-
-document
-.getElementById("answerFeedback")
-.textContent =
-"Choose an option first.";
-
-return;
-}
+document.getElementById("nextButton").onclick = ()=>{
+if(!selectedAnswer) return;
 
 scores[selectedAnswer.type]++;
-
-selectedAnswer = null;
-
 currentQuestion++;
 
 if(currentQuestion >= QUESTIONS.length){
-
 showResult();
 return;
-
 }
 
 renderQuestion();
+};
 
-});
-
-document
-.getElementById("skipButton")
-.addEventListener("click",()=>{
-
+document.getElementById("skipButton").onclick = ()=>{
 currentQuestion++;
+if(currentQuestion >= QUESTIONS.length) showResult();
+else renderQuestion();
+};
 
-if(currentQuestion >= QUESTIONS.length){
-
-showResult();
-return;
-
-}
-
-renderQuestion();
-
-});
-
-document
-.getElementById("continueButton")
-.addEventListener("click",()=>{
-
-window.location.href =
-"mirror.html";
-
-});
-
-document
-.getElementById("continueAdventure")
-.addEventListener("click",()=>{
-
-document
-.getElementById("resultContainer")
-.classList.add("hidden");
-
-document
-.getElementById("quizContainer")
-.classList.remove("hidden");
-
+document.getElementById("continueAdventure").onclick = ()=>{
 currentQuestion = 0;
-
-selectedAnswer = null;
-
-Object.keys(scores).forEach(key=>{
-scores[key] = 0;
-});
+Object.keys(scores).forEach(k=>scores[k]=0);
+renderQuestion();
+document.getElementById("resultContainer").classList.add("hidden");
+document.getElementById("quizContainer").classList.remove("hidden");
+};
 
 renderQuestion();
 
-});
 </script>
 
 </body>
 </html>
-
