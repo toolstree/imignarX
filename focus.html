@@ -251,7 +251,7 @@ let revealed = false;
 function renderQuestion(){ 
 
 const q = QUESTIONS[currentQuestion];
-
+revealed = false;
 questionText.textContent =
 "🃏 TAP TO REVEAL";
 
@@ -311,7 +311,16 @@ questionText.textContent =
 QUESTIONS[currentQuestion].question;
 
 };
-  
+questionText.onclick = function(){
+
+if(revealed) return;
+
+revealed = true;
+
+questionText.textContent =
+QUESTIONS[currentQuestion].question;
+
+};  
 renderQuestion();
 
 function getWinner() {
