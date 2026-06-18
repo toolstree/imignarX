@@ -311,3 +311,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   applyTranslations();
 });
+document.getElementById("shareBtn").onclick = async () => {
+
+const card = document.getElementById("shareCardBox");
+
+html2canvas(card).then(canvas => {
+
+canvas.toBlob(async (blob) => {
+
+const file = new File([blob], "imignarx-result.png", {type:"image/png"});
+
+if(navigator.canShare && navigator.canShare({files:[file]})){
+
+await navigator.share({
+files:[file],
+title:"My ImignarX Result",
+text:"Check what runs my brain today 🧠"
+});
+
+}else{
+
+const link = document.createElement("a");
+link.href = canvas.toDataURL();
+link.download = "imignarx-result.png";
+link.click();
+
+}
+
+});
+
+});
+
+};
