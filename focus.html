@@ -300,8 +300,7 @@ optionsContainer.appendChild(btn);
 });
 
 }
-let revealed = false;
-  questionText.onclick = function(){
+questionText.addEventListener("click", function(){
 
 if(revealed) return;
 
@@ -310,8 +309,9 @@ revealed = true;
 questionText.textContent =
 QUESTIONS[currentQuestion].question;
 
-};
-questionText.onclick = function(){
+});
+
+  questionText.onclick = function(){
 
 if(revealed) return;
 
