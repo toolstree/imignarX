@@ -67,7 +67,33 @@
         <div id="weeklyReport" class="insight">A short report will appear here after a few sessions.</div>
         <div id="weeklyTrend" class="insight small-text"></div>
       </div>
+        <div class="section">
 
+<div class="section-header">
+
+😂 DAILY ROAST
+
+</div>
+
+<div
+id="roastCard"
+class="insight">
+
+Press Roast Me.
+
+</div>
+
+<br>
+
+<button
+id="roastButton"
+class="btn primary">
+
+😂 Roast Me
+
+</button>
+
+</div>
       <div class="button-row">
         <button
 id="shareResult"
@@ -272,6 +298,56 @@ alert(
 );
 
 }
+
+}
+);
+const roasts = [
+
+"Your attention span has left the chat.",
+
+"You opened 17 tabs and completed emotional research instead.",
+
+"Your productivity system has more folders than achievements.",
+
+"You planned the plan for planning.",
+
+"You are currently procrastinating professionally.",
+
+"Today's biggest task: avoiding the actual task.",
+
+"Your brain said 'one minute' 47 minutes ago.",
+
+"You are not behind schedule. You are exploring alternate timelines.",
+
+"The to-do list fears being completed.",
+
+"Coffee is doing most of the heavy lifting today."
+
+];
+
+document
+.getElementById(
+"roastButton"
+)
+.addEventListener(
+"click",
+()=>{
+
+const roast =
+
+roasts[
+Math.floor(
+Math.random() *
+roasts.length
+)
+];
+
+document
+.getElementById(
+"roastCard"
+)
+.textContent =
+roast;
 
 }
 );
