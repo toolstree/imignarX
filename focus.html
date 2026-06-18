@@ -190,19 +190,27 @@ let revealed = false;
 const lang = localStorage.getItem("imignarxLanguage") || "English";
 
 function renderQuestion(){
+
+// random question instead of linear
+currentQuestion = Math.floor(Math.random() * QUESTIONS.length);
+
 const q = QUESTIONS[currentQuestion];
+
 revealed = false;
+selectedAnswer = null;
 
 questionText.textContent = "🃏 TAP TO REVEAL";
 
+// show ad again
 const ad = document.getElementById("questionAd");
 if(ad) ad.style.display = "block";
 
-questionCounter.textContent = `Question ${currentQuestion+1}/10`;
-const percent = Math.round(((currentQuestion+1)/10)*100);
-progressPercent.textContent = `${percent}%`;
-progressFill.style.width = `${percent}%`;
+// progress becomes "loop style"
+questionCounter.textContent = `Question ${Math.floor(Math.random()*10)+1}/∞`;
 
+progressPercent.textContent = `∞`;
+
+// reset options
 optionsContainer.innerHTML = "";
 
 q.options.forEach(option=>{
@@ -268,11 +276,7 @@ if(!selectedAnswer) return;
 scores[selectedAnswer.type]++;
 currentQuestion++;
 
-if(currentQuestion >= QUESTIONS.length){
-showResult();
-return;
-}
-
+// NEVER END
 renderQuestion();
 };
 
@@ -283,13 +287,28 @@ else renderQuestion();
 };
 
 document.getElementById("continueAdventure").onclick = ()=>{
-currentQuestion = 0;
-Object.keys(scores).forEach(k=>scores[k]=0);
-renderQuestion();
+
 document.getElementById("resultContainer").classList.add("hidden");
 document.getElementById("quizContainer").classList.remove("hidden");
+
+// restart infinite mode
+renderQuestion();
 };
 
+// reset but NOT boring reset
+currentQuestion = Math.floor(Math.random() * QUESTIONS.length);
+
+selectedAnswer = null;
+
+Object.keys(scores).forEach(k=>{
+scores[k] = 0;
+});
+
+document.getElementById("resultContainer").classList.add("hidden");
+document.getElementById("quizContainer").classList.remove("hidden");
+
+renderQuestion();
+};
 renderQuestion();
 
 </script>
