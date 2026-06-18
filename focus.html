@@ -247,6 +247,9 @@ document.getElementById("progressFill");
 const progressPercent =
 document.getElementById("progressPercent");
 let revealed = false;
+const lang =
+localStorage.getItem("imignarxLanguage")
+|| "English";
 
 function renderQuestion(){ 
 
@@ -305,22 +308,13 @@ questionText.addEventListener("click", function(){
 if(revealed) return;
 
 revealed = true;
-
 questionText.textContent =
-QUESTIONS[currentQuestion].question;
-
+typeof QUESTIONS[currentQuestion].question === "object"
+? QUESTIONS[currentQuestion].question[lang]
+: QUESTIONS[currentQuestion].question;
+  
 });
-
-  questionText.onclick = function(){
-
-if(revealed) return;
-
-revealed = true;
-
-questionText.textContent =
-QUESTIONS[currentQuestion].question;
-
-};  
+  
 renderQuestion();
 
 function getWinner() {
