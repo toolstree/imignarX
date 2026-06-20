@@ -1,26 +1,79 @@
+const APPS_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyXzETFX0yQWRggDHjS-LYuxCvTjgsI03_W5WjjrAaOER01CqQ7fUMQ9bBVjXegBsqu/exec";
+
 const EMAIL_REGEX =
 /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function submitEmail() {
 
-  const email =
+    const email =
     document
     .getElementById("emailInput")
     .value
     .trim();
 
-  if (
-    !EMAIL_REGEX.test(email)
-  ) {
+    if (!EMAIL_REGEX.test(email)) {
 
-    alert(
-      "Please enter a valid email."
-    );
+        alert(
+            "Please enter a valid email address."
+        );
 
-    return;
-  }
+        return;
+    }
 
-  saveEmail(email);
+    saveEmail(email);
+}
 
-  showResults();
+async function saveEmail(email){
+
+    try {
+
+        const primaryOffer =
+        getFunnelData(
+            finalResult.archetype
+        ).primary.title;
+
+        const secondaryOffer =
+        getFunnelData(
+            finalResult.archetype
+        ).secondary.title;
+
+        await fetch(
+            APPS_SCRIPT_URL,
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+
+                    email:email,
+
+                    archetype:
+                    finalResult.archetype,
+
+                    confidence:
+                    finalResult.confidence,
+
+                    primaryOffer:
+                    primaryOffer,
+
+                    secondaryOffer:
+                    secondaryOffer
+
+                })
+            }
+        );
+
+    }
+    catch(error){
+
+        console.log(
+            "Email Save Error:",
+            error
+        );
+
+    }
+
+    showResults();
 }
