@@ -1,39 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b1220" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css" />
-  <title>ImignarX</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ImignarX - Free Lifetime Personality Mirror</title>
+
+<meta name="description"
+content="Discover your hidden archetype, strengths, blind spots and growth path. Free forever.">
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet" href="css/style.css">
+
 </head>
+
 <body>
-  <div class="container">
-    <div class="card">
-      <div class="brand">
-        <h1 data-translate-page="index" data-translate-key="title">ImignarX</h1>
-        <p class="subtitle" data-translate-page="index" data-translate-key="subtitle">Know yourself better, one day at a time.</p>
-        <p class="trust-line" data-translate-page="index" data-translate-key="trustLine">Your information stays private and helps personalize your daily reflections.</p>
-      </div>
 
-      <form id="onboard-form">
-        <label data-translate-page="index" data-translate-key="nameLabel">Name</label>
-        <input type="text" id="name" placeholder="Enter your name" required />
+<div class="container">
 
-        <label data-translate-page="index" data-translate-key="dobLabel">Date of Birth</label>
-        <input type="date" id="dob" required />
+    <div class="logo">
 
-        <label for="language" data-translate-page="index" data-translate-key="languageLabel">Preferred Language</label>
-        <p id="detected-language" class="detected-language"></p>
-        <select id="language" name="language"></select>
+        <h1>IMIGNARX</h1>
 
-        <button type="submit" class="primary-button" data-translate-page="index" data-translate-key="beginButton">Begin</button>
-        <p id="feedback" class="feedback"></p>
-      </form>
+        <p>
+            Free Lifetime Personality Mirror
+        </p>
+
     </div>
-  </div>
 
-  <script src="app.js"></script>
+    <!-- START SCREEN -->
+
+    <div id="startScreen" class="card">
+
+        <h2>
+            Discover Your Hidden Archetype
+        </h2>
+
+        <br>
+
+        <p>
+
+            ⚡ 50-question personality engine
+
+            <br><br>
+
+            ✓ Hidden strengths
+
+            <br>
+
+            ✓ Blind spots
+
+            <br>
+
+            ✓ Personalized roast
+
+            <br>
+
+            ✓ Growth challenge
+
+            <br>
+
+            ✓ Free forever
+
+        </p>
+
+        <br>
+
+        <button
+            class="btn"
+            onclick="startQuiz()">
+
+            Start Scan
+
+        </button>
+
+    </div>
+
+    <!-- QUIZ SCREEN -->
+
+    <div
+        id="quizScreen"
+        class="card hidden">
+
+        <div class="progress">
+
+            <div
+                id="progressBar"
+                class="progress-bar">
+            </div>
+
+        </div>
+
+        <br>
+
+        <div
+            id="questionText"
+            class="question">
+        </div>
+
+        <div id="optionsContainer"></div>
+
+    </div>
+
+    <!-- ANALYSIS SCREEN -->
+
+    <div
+        id="analysisScreen"
+        class="card hidden">
+
+        <div class="analyzing">
+
+            <div class="spinner"></div>
+
+            <h2>
+                Analyzing Your Personality...
+            </h2>
+
+            <br>
+
+            <p>
+
+                ✓ Behavioral patterns detected
+
+                <br>
+
+                ✓ Hidden motivations mapped
+
+                <br>
+
+                ✓ Personality profile generated
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- EMAIL GATE -->
+
+    <div
+        id="emailScreen"
+        class="card hidden">
+
+        <h2>
+            ⚡ Analysis Complete
+        </h2>
+
+        <br>
+
+        <p>
+
+            Unlock:
+
+            <br><br>
+
+            ✓ Full Archetype Report
+
+            <br>
+
+            ✓ Hidden Superpower
+
+            <br>
+
+            ✓ Blind Spot Analysis
+
+            <br>
+
+            ✓ Personalized Roast
+
+            <br>
+
+            ✓ Growth Challenge
+
+        </p>
+
+        <input
+            id="emailInput"
+            class="email-input"
+            placeholder="Enter your email">
+
+        <br><br>
+
+        <button
+            class="btn"
+            onclick="submitEmail()">
+
+            Unlock Report
+
+        </button>
+
+    </div>
+
+    <!-- RESULT SCREEN -->
+
+    <div
+        id="resultScreen"
+        class="card hidden">
+
+        <h1
+            id="resultTitle"
+            class="result-title">
+        </h1>
+
+        <br>
+
+        <div
+            id="confidenceBox"
+            class="result-block">
+        </div>
+
+        <div
+            id="insightBox"
+            class="result-block">
+        </div>
+
+        <div
+            id="strengthBox"
+            class="result-block">
+        </div>
+
+        <div
+            id="superpowerBox"
+            class="result-block">
+        </div>
+
+        <div
+            id="blindspotBox"
+            class="result-block">
+        </div>
+
+        <div
+            id="roastBox"
+            class="result-block">
+        </div>
+
+        <div
+            id="challengeBox"
+            class="result-block">
+        </div>
+
+        <!-- RESOURCE SECTION -->
+
+        <div class="offer-box">
+
+            <h2>
+                Recommended Resources
+            </h2>
+
+            <br>
+
+            <p>
+
+                These are NOT required to use ImignarX.
+
+                <br><br>
+
+                They're simply resources that
+                tend to resonate with people
+                who score similarly to you.
+
+            </p>
+
+            <br>
+
+            <div id="offersContainer"></div>
+
+        </div>
+
+        <br>
+
+        <div class="offer-box">
+
+            <h3>
+                About ImignarX
+            </h3>
+
+            <br>
+
+            <p>
+
+                ImignarX is a free lifetime
+                personality mirror designed
+                to help people understand
+                strengths, blind spots,
+                habits and motivations.
+
+                <br><br>
+
+                No subscription.
+
+                <br>
+
+                No monthly fee.
+
+                <br>
+
+                Free forever.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+
+        © ImignarX
+
+    </div>
+
+</div>
+
+<script src="data/funnels.js"></script>
+
+<script src="js/archetypes.js"></script>
+
+<script src="js/questions.js"></script>
+
+<script src="js/scoring.js"></script>
+
+<script src="js/email.js"></script>
+
+<script src="js/analytics.js"></script>
+
+<script src="js/app.js"></script>
+
 </body>
 </html>
