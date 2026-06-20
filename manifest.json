@@ -1,19 +1,20 @@
 {
   "name": "ImignarX",
   "short_name": "ImignarX",
-  "description": "A personal mirror for strength, clarity and self-understanding.",
-  "start_url": "./index.html",
+  "description": "Free Lifetime Personality Mirror",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#080c18",
-  "theme_color": "#5f7dff",
+  "background_color": "#071014",
+  "theme_color": "#14B8A6",
+  "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGUlEQVR4nO3aMQ7CMAyF4Q/9/w9O0eUG0VyJc5gmmFtQ7Q/5wAg2FE/ehyGSAhyzFeBrJp8nLNDgL0QFfX+nY4KUjZftPZQxv2qXACDMs8OABaA+KvXRAc3mhiVIAZPMFUa1wrJIrA5epwBy9ebu8MrWYoTol4JSbYgRLY8OM5GBtQTUaBTU6gIsNtgE6/gbb7e3+w3QqA0GmMKDodA9S1h2I1f4aQNv3pP408bCjQv9lp2H7GPEAXcB9ZL6D6eRD+TMH24pHUbTQ3Cm2AxeB6+BFvSJjPl3D4wxD6O9X+ZKD30AAAAASUVORK5CYII=",
+      "src": "assets/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAABKUlEQVR4nO3asQ2CQBBE0V+z/8UxBUF+wfQOE5loOaHQLzAq6BvwCjEYyrsOZkG0ZYHk9kBEa23U9v065G2PZ1/BMDYAKqWAMI6hA4Ce0AcQygA1P3gKvXPNd+uBBIbY4bhxGaE7itdREtg+gVTWAPqG+lQOGpG9/XwWApgohxCqEb3EIMvYAB5A5H5OKt9/f4zH6lC9g2rJ1aKB0e0l8g1jK+YCZ8B6/Ak6AGepALdA5eD8QFojlfvQz/Dy731N0QA2zxhHw3f2REB2LkEM4xWn2Ir+vq1QZsEDL+gNq3YkAAAAASUVORK5CYII=",
+      "src": "assets/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
