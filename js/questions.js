@@ -23,7 +23,6 @@ scores:{ explorer:2, freeSpirit:1 }
 }
 ]
 },
-
 {
 id:2,
 category:"Internet Culture",
@@ -47,7 +46,6 @@ scores:{ learnEarn:2 }
 }
 ]
 },
-
 {
 id:3,
 category:"Humor",
@@ -71,7 +69,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:4,
 category:"Life",
@@ -95,7 +92,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:5,
 category:"Sports",
@@ -119,7 +115,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:6,
 category:"AI",
@@ -143,7 +138,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:7,
 category:"Relationships",
@@ -167,7 +161,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:8,
 category:"Humor",
@@ -191,7 +184,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:9,
 category:"Career",
@@ -215,7 +207,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:10,
 category:"Humor",
@@ -238,6 +229,7 @@ text:"Ask it for life advice.",
 scores:{ freeSpirit:2 }
 }
 ]
+},
 {
 id:11,
 category:"Productivity",
@@ -261,7 +253,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:12,
 category:"Money",
@@ -285,7 +276,6 @@ scores:{ learnEarn:2 }
 }
 ]
 },
-
 {
 id:13,
 category:"Humor",
@@ -309,7 +299,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:14,
 category:"Sports",
@@ -333,7 +322,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:15,
 category:"Internet",
@@ -357,7 +345,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:16,
 category:"Life",
@@ -381,7 +368,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:17,
 category:"Humor",
@@ -405,7 +391,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:18,
 category:"AI",
@@ -429,7 +414,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:19,
 category:"Productivity",
@@ -453,7 +437,6 @@ scores:{ learnEarn:2 }
 }
 ]
 },
-
 {
 id:20,
 category:"Humor",
@@ -476,6 +459,7 @@ text:"Ignore the warning and see what happens.",
 scores:{ explorer:2 }
 }
 ]
+},
 {
 id:21,
 category:"Creator Economy",
@@ -499,7 +483,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:22,
 category:"Humor",
@@ -523,7 +506,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:23,
 category:"Life",
@@ -547,7 +529,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:24,
 category:"Internet",
@@ -571,7 +552,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:25,
 category:"Humor",
@@ -595,7 +575,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:26,
 category:"Mindset",
@@ -619,7 +598,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:27,
 category:"Humor",
@@ -643,7 +621,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:28,
 category:"Creator Economy",
@@ -667,7 +644,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:29,
 category:"Life",
@@ -691,7 +667,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:30,
 category:"Humor",
@@ -714,6 +689,7 @@ text:"Accept immediately.",
 scores:{ explorer:2 }
 }
 ]
+},
 {
 id:31,
 category:"AI",
@@ -737,7 +713,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:32,
 category:"Humor",
@@ -761,7 +736,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:33,
 category:"Future",
@@ -785,7 +759,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:34,
 category:"Creator Economy",
@@ -809,7 +782,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:35,
 category:"Humor",
@@ -833,7 +805,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:36,
 category:"Sports",
@@ -857,7 +828,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:37,
 category:"Internet",
@@ -881,7 +851,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:38,
 category:"Humor",
@@ -905,7 +874,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:39,
 category:"Mindset",
@@ -929,7 +897,6 @@ scores:{ freeSpirit:2 }
 }
 ]
 },
-
 {
 id:40,
 category:"Humor",
@@ -952,6 +919,7 @@ text:"Ask it to take me flying.",
 scores:{ explorer:2 }
 }
 ]
+},
 {
 id:41,
 category:"Life",
@@ -975,7 +943,6 @@ scores:{ explorer:2, freeSpirit:1 }
 }
 ]
 },
-
 {
 id:42,
 category:"Humor",
@@ -999,7 +966,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:43,
 category:"Creator Economy",
@@ -1023,7 +989,6 @@ scores:{ creator:2 }
 }
 ]
 },
-
 {
 id:44,
 category:"Future",
@@ -1047,7 +1012,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:45,
 category:"Humor",
@@ -1071,7 +1035,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:46,
 category:"Mindset",
@@ -1095,7 +1058,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:47,
 category:"Internet",
@@ -1119,7 +1081,6 @@ scores:{ creator:2 }
 }
 ]
 },
-
 {
 id:48,
 category:"Humor",
@@ -1143,7 +1104,6 @@ scores:{ explorer:2 }
 }
 ]
 },
-
 {
 id:49,
 category:"Life",
@@ -1167,7 +1127,6 @@ scores:{ creator:2 }
 }
 ]
 },
-
 {
 id:50,
 category:"Final",
