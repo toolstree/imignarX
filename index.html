@@ -1,19 +1,27 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ImignarX - Free Lifetime Personality Mirror</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+content="#14B8A6">
 
 <meta name="description"
-content="Discover your hidden archetype, strengths, blind spots and growth path. Free forever.">
+content="Discover your hidden archetype, strengths, blind spots, superpowers and growth path. Free forever.">
 
-<link rel="manifest" href="manifest.json">
+<title>ImignarX | Free Lifetime Personality Mirror</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="manifest"
+href="manifest.json">
+
+<link rel="stylesheet"
+href="css/style.css">
 
 </head>
 
@@ -21,296 +29,365 @@ content="Discover your hidden archetype, strengths, blind spots and growth path.
 
 <div class="container">
 
-    <div class="logo">
+```
+<div class="logo">
 
-        <h1>IMIGNARX</h1>
+    <div class="hero-badge">
 
-        <p>
-            Free Lifetime Personality Mirror
-        </p>
-
-    </div>
-
-    <!-- START SCREEN -->
-
-    <div id="startScreen" class="card">
-
-        <h2>
-            Discover Your Hidden Archetype
-        </h2>
-
-        <br>
-
-        <p>
-
-            ⚡ 50-question personality engine
-
-            <br><br>
-
-            ✓ Hidden strengths
-
-            <br>
-
-            ✓ Blind spots
-
-            <br>
-
-            ✓ Personalized roast
-
-            <br>
-
-            ✓ Growth challenge
-
-            <br>
-
-            ✓ Free forever
-
-        </p>
-
-        <br>
-
-        <button
-            class="btn"
-            onclick="startQuiz()">
-
-            Start Scan
-
-        </button>
+        FREE LIFETIME TOOL
 
     </div>
 
-    <!-- QUIZ SCREEN -->
+    <h1>
 
-    <div
-        id="quizScreen"
-        class="card hidden">
+        IMIGNARX
 
-        <div class="progress">
+    </h1>
 
-            <div
-                id="progressBar"
-                class="progress-bar">
-            </div>
+    <p>
 
-        </div>
+        Discover the hidden archetype behind your decisions,
+        habits, ambitions and blind spots.
 
-        <br>
+    </p>
 
-        <div
-            id="questionText"
-            class="question">
-        </div>
+</div>
 
-        <div id="optionsContainer"></div>
+<!-- START SCREEN -->
 
-    </div>
+<div id="startScreen" class="card">
 
-    <!-- ANALYSIS SCREEN -->
+    <h2>
 
-    <div
-        id="analysisScreen"
-        class="card hidden">
+        What Type Of Mind Are You Really?
 
-        <div class="analyzing">
+    </h2>
 
-            <div class="spinner"></div>
+    <br>
 
-            <h2>
-                Analyzing Your Personality...
-            </h2>
+    <p>
 
-            <br>
-
-            <p>
-
-                ✓ Behavioral patterns detected
-
-                <br>
-
-                ✓ Hidden motivations mapped
-
-                <br>
-
-                ✓ Personality profile generated
-
-            </p>
-
-        </div>
-
-    </div>
-
-    <!-- EMAIL GATE -->
-
-    <div
-        id="emailScreen"
-        class="card hidden">
-
-        <h2>
-            ⚡ Analysis Complete
-        </h2>
-
-        <br>
-
-        <p>
-
-            Unlock:
-
-            <br><br>
-
-            ✓ Full Archetype Report
-
-            <br>
-
-            ✓ Hidden Superpower
-
-            <br>
-
-            ✓ Blind Spot Analysis
-
-            <br>
-
-            ✓ Personalized Roast
-
-            <br>
-
-            ✓ Growth Challenge
-
-        </p>
-
-        <input
-            id="emailInput"
-            class="email-input"
-            placeholder="Enter your email">
+        In just a few minutes you'll uncover:
 
         <br><br>
 
-        <button
-            class="btn"
-            onclick="submitEmail()">
+        🧠 Hidden Strengths
 
-            Unlock Report
+        <br>
 
-        </button>
+        ⚡ Blind Spots
+
+        <br>
+
+        🔥 Personalized Roast
+
+        <br>
+
+        🚀 Hidden Superpower
+
+        <br>
+
+        🎯 Growth Challenge
+
+        <br>
+
+        💎 Personality Insights
+
+    </p>
+
+    <br>
+
+    <button
+    class="btn"
+    onclick="startQuiz()">
+
+        Begin Personality Scan
+
+    </button>
+
+    <br><br>
+
+    <small>
+
+        No subscriptions.
+        No monthly fees.
+        Free forever.
+
+    </small>
+
+</div>
+
+<!-- QUIZ SCREEN -->
+
+<div
+id="quizScreen"
+class="card hidden">
+
+    <div class="progress">
+
+        <div
+        id="progressBar"
+        class="progress-bar">
+        </div>
 
     </div>
 
-    <!-- RESULT SCREEN -->
+    <br>
 
     <div
-        id="resultScreen"
-        class="card hidden">
+    id="questionText"
+    class="question">
+    </div>
 
-        <h1
-            id="resultTitle"
-            class="result-title">
-        </h1>
+    <br>
+
+    <div
+    id="optionsContainer">
+    </div>
+
+</div>
+
+<!-- ANALYSIS SCREEN -->
+
+<div
+id="analysisScreen"
+class="card hidden">
+
+    <div class="analyzing">
+
+        <div class="spinner"></div>
+
+        <h2>
+
+            Mapping Your Personality...
+
+        </h2>
+
+        <br>
+
+        <p>
+
+            ✓ Behavioral Patterns Detected
+
+            <br>
+
+            ✓ Motivations Identified
+
+            <br>
+
+            ✓ Archetype Calculated
+
+            <br>
+
+            ✓ Personalized Report Generating
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- EMAIL SCREEN -->
+
+<div
+id="emailScreen"
+class="card hidden">
+
+    <h2>
+
+        Your Report Is Ready
+
+    </h2>
+
+    <br>
+
+    <p>
+
+        Unlock your complete personality report:
+
+        <br><br>
+
+        ✓ Archetype Analysis
+
+        <br>
+
+        ✓ Hidden Superpower
+
+        <br>
+
+        ✓ Blind Spot Detection
+
+        <br>
+
+        ✓ Personalized Roast
+
+        <br>
+
+        ✓ Growth Blueprint
+
+    </p>
+
+    <br>
+
+    <input
+    id="emailInput"
+    class="email-input"
+    type="email"
+    placeholder="you@example.com">
+
+    <br><br>
+
+    <button
+    class="btn"
+    onclick="submitEmail()">
+
+        Reveal My Personality Report
+
+    </button>
+
+</div>
+
+<!-- RESULTS SCREEN -->
+
+<div
+id="resultScreen"
+class="card hidden">
+
+    <h1
+    id="resultTitle"
+    class="result-title">
+    </h1>
+
+    <br>
+
+    <div
+    id="confidenceBox"
+    class="result-block">
+    </div>
+
+    <div
+    id="insightBox"
+    class="result-block">
+    </div>
+
+    <div
+    id="strengthBox"
+    class="result-block">
+    </div>
+
+    <div
+    id="superpowerBox"
+    class="result-block">
+    </div>
+
+    <div
+    id="blindspotBox"
+    class="result-block">
+    </div>
+
+    <div
+    id="roastBox"
+    class="result-block">
+    </div>
+
+    <div
+    id="challengeBox"
+    class="result-block">
+    </div>
+
+    <!-- OFFERS -->
+
+    <div class="offer-box">
+
+        <h2>
+
+            People Similar To You Often Explore
+
+        </h2>
+
+        <br>
+
+        <p>
+
+            These resources are completely optional.
+
+            <br><br>
+
+            People with similar personality
+            patterns often find them useful.
+
+        </p>
 
         <br>
 
         <div
-            id="confidenceBox"
-            class="result-block">
+        id="offersContainer">
         </div>
 
-        <div
-            id="insightBox"
-            class="result-block">
-        </div>
+    </div>
 
-        <div
-            id="strengthBox"
-            class="result-block">
-        </div>
+    <br>
 
-        <div
-            id="superpowerBox"
-            class="result-block">
-        </div>
+    <!-- ABOUT -->
 
-        <div
-            id="blindspotBox"
-            class="result-block">
-        </div>
+    <div class="offer-box">
 
-        <div
-            id="roastBox"
-            class="result-block">
-        </div>
+        <h3>
 
-        <div
-            id="challengeBox"
-            class="result-block">
-        </div>
+            About ImignarX
 
-        <!-- RESOURCE SECTION -->
-
-        <div class="offer-box">
-
-            <h2>
-                Recommended Resources
-            </h2>
-
-            <br>
-
-            <p>
-
-                These are NOT required to use ImignarX.
-
-                <br><br>
-
-                They're simply resources that
-                tend to resonate with people
-                who score similarly to you.
-
-            </p>
-
-            <br>
-
-            <div id="offersContainer"></div>
-
-        </div>
+        </h3>
 
         <br>
 
-        <div class="offer-box">
+        <p>
 
-            <h3>
-                About ImignarX
-            </h3>
+            ImignarX is a free lifetime personality mirror.
+
+            <br><br>
+
+            Designed to help you understand:
+
+            <br><br>
+
+            • Strengths
 
             <br>
 
-            <p>
+            • Blind Spots
 
-                ImignarX is a free lifetime
-                personality mirror designed
-                to help people understand
-                strengths, blind spots,
-                habits and motivations.
+            <br>
 
-                <br><br>
+            • Motivations
 
-                No subscription.
+            <br>
 
-                <br>
+            • Growth Opportunities
 
-                No monthly fee.
+            <br><br>
 
-                <br>
+            No subscriptions.
 
-                Free forever.
+            <br>
 
-            </p>
+            No monthly fees.
 
-        </div>
+            <br>
 
-    </div>
+            Free forever.
 
-    <div class="footer">
-
-        © ImignarX
+        </p>
 
     </div>
+
+</div>
+
+<div class="footer">
+
+    Built With Curiosity • Powered By Patterns
+
+</div>
+```
 
 </div>
 
