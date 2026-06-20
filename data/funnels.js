@@ -6,8 +6,8 @@ const FUNNELS = {
       url: "http://bit.ly/4eB5Za0"
     },
     secondary: {
-      title: "Learn & Earn Accelerator",
-      url: "https://bit.ly/4gy6aoR"
+  title: "Freedom Ops",
+  url: "https://bit.ly/4el8jmz"
     }
   },
 
