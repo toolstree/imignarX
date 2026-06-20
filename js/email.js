@@ -1,5 +1,5 @@
 const APPS_SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbyXzETFX0yQWRggDHjS-LYuxCvTjgsI03_W5WjjrAaOER01CqQ7fUMQ9bBVjXegBsqu/exec";
+"https://script.google.com/macros/s/AKfycbzzSBU6XKEqapGvD2QbZSWpL33kQRllskxR6zXaElxzndm5SfegNA5Ekr1CLWlpsDoe/exec";
 
 const EMAIL_REGEX =
 /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
