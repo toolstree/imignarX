@@ -151,12 +151,54 @@ window.submitEmail = async function() {
     }
 
     currentResults =
-        calculateResults(
-            totalScores
-        );
+    calculateResults(
+        totalScores
+    );
 
-    renderResults();
+try {
 
+    await fetch(
+        APPS_SCRIPT_URL,
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+
+                email:email,
+
+                archetype:
+                currentResults.archetype,
+
+                confidence:
+                currentResults.confidence,
+
+                primaryOffer:
+                getFunnelData(
+                    currentResults.archetype
+                ).primary.title,
+
+                secondaryOffer:
+                getFunnelData(
+                    currentResults.archetype
+                ).secondary.title
+
+            })
+        }
+    );
+
+}
+catch(error){
+
+    console.log(
+        "Google Sheets Error:",
+        error
+    );
+
+}
+
+renderResults();
 };
 
 function renderResults() {
