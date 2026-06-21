@@ -156,7 +156,7 @@ window.submitEmail = async function() {
     );
 
 try {
-
+ console.log("Sending to Google Sheets...");
     await fetch(
         APPS_SCRIPT_URL,
         {
@@ -197,7 +197,7 @@ catch(error){
     );
 
 }
-
+console.log("Data sent successfully");
 renderResults();
 };
 
