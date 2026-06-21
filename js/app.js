@@ -1,6 +1,6 @@
 let currentQuestionIndex = 0;
 
-let totalScores = createEmptyScores();
+let totalScores = createEmptyScores();  
 
 let currentResults = null;
 
@@ -151,58 +151,63 @@ window.submitEmail = async function() {
     }
 
     currentResults =
-    calculateResults(
-        totalScores
-    );
+        calculateResults(
+            totalScores
+        );
 
-try {
- console.log("Sending to Google Sheets...");
-    await fetch(
-        APPS_SCRIPT_URL,
-        {
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
+    try {
 
-                email:email,
+        console.log(
+            "Sending to Google Sheets..."
+        );
 
-                archetype:
-                currentResults.archetype,
+        await fetch(
+            APPS_SCRIPT_URL,
+            {
+                method: "POST",
+                body: JSON.stringify({
 
-                confidence:
-                currentResults.confidence,
+                    email: email,
 
-                primaryOffer:
-                getFunnelData(
-                    currentResults.archetype
-                ).primary.title,
+                    archetype:
+                    currentResults.archetype,
 
-                secondaryOffer:
-                getFunnelData(
-                    currentResults.archetype
-                ).secondary.title
+                    confidence:
+                    currentResults.confidence,
 
-            })
-        }
-    );
+                    primaryOffer:
+                    getFunnelData(
+                        currentResults.archetype
+                    ).primary.title,
 
-}
-catch(error){
+                    secondaryOffer:
+                    getFunnelData(
+                        currentResults.archetype
+                    ).secondary.title
 
-    console.log(
-        "Google Sheets Error:",
-        error
-    );
+                })
 
-}
-console.log("Data sent successfully");
-renderResults();
+            }
+        );
+
+        console.log(
+            "Data sent successfully"
+        );
+
+    }
+    catch(error){
+
+        console.log(
+            "Google Sheets Error:",
+            error
+        );
+
+    }
+
+    renderResults();
+
 };
-
 function renderResults() {
-
     const result =
         currentResults;
 
